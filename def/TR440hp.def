@@ -1,0 +1,129 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE TR440hp;
+
+(*	20.06.18	*)
+
+IMPORT FileFunc ;
+
+
+
+CONST
+	g1 =			'1' ;
+	g2 =			'.' ;
+	v1 =			'2' ;
+	v2 =			'.' ;
+	v3 =			'1' ;
+
+	TAB =			CHR(9) ;
+
+	DefaultPfad =		'Software\SEB\TR440' ;
+	DatenKey =		'Datenhaltung' ;
+	QuellbasisKey =		'Quellbasis' ;
+	EditorKey =		'Editor' ;
+	BenKey =		'Ben' ;
+	BKZkey =		'BKZ' ;
+	FKZkey =		'FKZ' ;
+	ZhoeheKey =		'Zeichenhoehe' ;
+	MaxSpalteKey =		'MaxSpalte' ;
+	MaxZeileKey =		'MaxZeile' ;
+	MaximalKey =		'Maximal' ;
+	FontKey =		'Fontname' ;
+
+	TASkey =		'DefTAS' ;
+	LSTkey =		'DefLST' ;
+	TRACkey =		'DefTRAC' ;
+	KDOkey =		'DefKDO' ;
+
+	DruckerKey =		'Drucker' ;
+	DruckerFontKey =	'DruckerFont' ;
+
+
+VAR
+
+	cmdZeichenhoehe :	CARDINAL = 0 ;
+	cmdFontName :		ARRAY [0..127] OF CHAR = '' ;
+	cmdMaxSpalte :		CARDINAL = 0 ;
+	cmdMaxZeile :		CARDINAL = 0 ;
+	cmdMaximal :		BOOLEAN = TRUE ;
+	cmdAsmVorrang :		BOOLEAN = FALSE ;
+	cmdShowInfo :		BOOLEAN = FALSE ;
+	cmdEigenerAssembler :	BOOLEAN = FALSE ;
+
+	TermProtDatei,
+	AblaufProtDatei :	FileFunc.File ;
+
+	TermProtEingeschaltet :	BOOLEAN = FALSE ;
+	AblaufProtEingeschaltet:BOOLEAN = FALSE ;
+	EingabeAbschluss :	BOOLEAN = FALSE ;
+	TTYanschluss :		BOOLEAN = FALSE ;
+	COManschluss :		BOOLEAN = FALSE ;
+	SSRsZaehlen :		BOOLEAN = FALSE ;
+
+	InitFehlermeldung :	BOOLEAN = FALSE ;
+
+	WebInterface :		BOOLEAN = FALSE ;
+
+	Editorname,
+	KdoDirectory,
+	TerminalProtokoll,
+	AblaufProtokoll :	ARRAY [0..255] OF CHAR ;
+
+	Drucker :		ARRAY [0..255] OF CHAR = '' ;
+	DruckerFont :		ARRAY [0..255] OF CHAR = 'Courier New' ;
+
+	Quellbasis,
+	DefaultQuelle,
+	DefaultLST,
+	DefaultTRAC,
+	DefaultKDO,
+	DefaultTR440 :		ARRAY [0..255] OF CHAR ;
+
+	GLOBmsPause :		CARDINAL = 0 ;
+
+
+
+PROCEDURE TermProtEin (neu : BOOLEAN) ;
+
+PROCEDURE TermProtAus ;
+
+PROCEDURE AblaufProtEin (neu : BOOLEAN) ;
+
+PROCEDURE AblaufProtAus ;
+
+PROCEDURE Interpreter ;
+
+PROCEDURE upShowMemory ;
+
+
+PROCEDURE upCallAssembler (name : ARRAY OF CHAR ; mitLauf : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE upProgMerke (name : ARRAY OF CHAR) ;
+
+PROCEDURE upProgStarte (name : ARRAY OF CHAR) ;
+
+PROCEDURE upProgMontiere (name : ARRAY OF CHAR) ;
+
+PROCEDURE upProgProg (name : ARRAY OF CHAR) ;
+
+PROCEDURE upProgLoesche (name : ARRAY OF CHAR) ;
+
+
+PROCEDURE insAblaufProtokoll (ch : CHAR) ;
+
+
+
+PROCEDURE InitDefaults ;
+
+PROCEDURE GetDefaultQuelle ;
+
+PROCEDURE Eingabe ;
+
+
+END TR440hp.

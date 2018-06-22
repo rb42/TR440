@@ -1,0 +1,21 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE EingabeGebiet;
+
+(*	13.02.16	*)
+
+
+PROCEDURE InitEingabeGebiet ;
+
+PROCEDURE PutEingabeGebiet (str : ARRAY OF CHAR) ;
+
+PROCEDURE ExitEingabeGebiet (AAE, LNGE : CARDINAL) (* FluLi *) : CARDINAL ;
+
+
+END EingabeGebiet.

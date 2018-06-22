@@ -1,0 +1,22 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE upTextFrage;
+
+(*	22.02.16	*)
+
+IMPORT WIN32 ;
+
+
+VAR
+	Bezeichnung :	ARRAY [0..31] OF CHAR ;
+
+
+PROCEDURE TextHolen (hWnd : WIN32.HWND; VAR txt : ARRAY OF CHAR) : BOOLEAN ;
+
+END upTextFrage.

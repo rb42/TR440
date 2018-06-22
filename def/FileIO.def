@@ -1,0 +1,70 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE FileIO;
+
+
+(*	20.06.18	*)
+
+
+FROM FileFunc IMPORT
+	File ;
+
+FROM SYSTEM IMPORT
+	ADDRESS, BYTE ;
+
+
+TYPE
+	FILE =	File ;
+
+
+PROCEDURE OpenReadFile (VAR datei : FILE ; name : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE Rewind (VAR datei : FILE) : BOOLEAN ;
+
+PROCEDURE ReadByte (VAR datei : FILE ; VAR ch : CHAR) : BOOLEAN ;
+
+PROCEDURE ReadChar (VAR datei : FILE ; VAR ch : CHAR) : BOOLEAN ; (* mit EOL- Erkennung *)
+
+PROCEDURE ReadBytes (VAR datei : FILE ; VAR str : ARRAY OF BYTE) : BOOLEAN ;
+
+PROCEDURE ReadBlock (VAR datei : FILE ; VAR block : ARRAY OF BYTE ; len : CARDINAL) : BOOLEAN ;
+
+PROCEDURE ReadLn (VAR datei : FILE ; VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE Eof (VAR datei : FILE) : BOOLEAN ;
+
+PROCEDURE DateiKomplettLesen (Dateiname : ARRAY OF CHAR ; VAR DateiLaenge : CARDINAL) : ADDRESS ;
+
+
+PROCEDURE CreateFileBuf (VAR datei : FILE ; name : ARRAY OF CHAR ; VAR Buffer : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE OpenAppendFileBuf (VAR datei : FILE ; name : ARRAY OF CHAR ; VAR Buffer : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE CreateFile (VAR datei : FILE ; name : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE WriteByte (VAR datei : FILE ; VAR ch : CHAR) : BOOLEAN ;
+
+PROCEDURE WriteString (VAR datei : FILE ; string : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE WriteLn (VAR datei : FILE ; zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE WriteBytes (VAR datei : FILE ; VAR inhalt : ARRAY OF BYTE) : BOOLEAN ;
+
+PROCEDURE WriteBlock (VAR datei : FILE ; VAR block : ARRAY OF BYTE ; len : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE WriteF (VAR datei : FILE ; formatStr : ARRAY OF CHAR	(* %s für String %c für CARDINAL %h für Hex-CARDINAL %i für INTEGER %l für LONGINT \t für TAB *)
+
+		) %IF %NOT DLL %THEN [RightToLeft, LEAVES, VARIABLE] %END ;	(* beliebige Anzahl Parameter dahinter *)
+
+
+PROCEDURE CloseFile (VAR datei : FILE) ;
+
+
+END FileIO.

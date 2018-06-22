@@ -1,0 +1,59 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SetzenLoeschen;
+
+(*	20.11.15	*)
+
+PROCEDURE _BA ;
+
+PROCEDURE _BAR ;
+
+PROCEDURE _BAN ;
+
+PROCEDURE _BANR ;
+
+PROCEDURE _LR ;
+
+PROCEDURE _LA ;
+
+PROCEDURE _XBA ;
+
+PROCEDURE _XBAN ;
+
+PROCEDURE _ZX ;
+
+PROCEDURE _ZU ;
+
+PROCEDURE _ZTR ;
+
+PROCEDURE _ZT0 ;
+
+PROCEDURE _ZT1 ;
+
+PROCEDURE _ZT2 ;
+
+PROCEDURE _ZT3 ;
+
+PROCEDURE _LC ;
+
+PROCEDURE _LMT ;
+
+PROCEDURE _LMC ;
+
+PROCEDURE _ZMC ;
+
+PROCEDURE _LZL ;
+
+PROCEDURE _NL ;
+
+PROCEDURE _ZI ;
+
+
+
+END SetzenLoeschen.

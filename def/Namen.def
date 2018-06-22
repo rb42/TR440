@@ -1,0 +1,140 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Namen;
+
+(*	06.05.16	*)
+
+FROM Struktur IMPORT
+	SpeicherAdresse ;
+
+TYPE
+	NamensTyp =		(ElemUndef, ElemName, ElemVerweis, ElemZeile, ElemQuelle, ElemWoerterbuch, ElemErsetzung, ElemMakro) ;
+
+	pName =			POINTER TO tName ;
+	tName =			RECORD
+					next :	pName ;
+
+					wert :	CARDINAL ;
+
+					CASE typ : NamensTyp OF
+					ElemName :		wb :		pName ;		(* Verweis auf Wörterbuch in einem Namen	*)
+					|
+					ElemVerweis :		echtname :	pName ;		(* Verweis auf echten Namen bei EXTERN-Namen	*)
+					|
+					ElemZeile :		quelle :	pName ;		(* Verweis auf Quelle in einem Zeilentext	*)
+					|
+					ElemWoerterbuch :	nam0 :		pName ;		(* Verweis auf 1. Namen in einem Wörterbuch	*)
+					|
+					ElemQuelle,
+					ElemMakro :		zeile0 :	pName ;		(* Verweis auf 1. Zeile in einer Quelle	/ Makro	*)
+					|
+					ElemErsetzung :		inhalt :	pName ;		(* Verweis auf Pseudonamen mit Einsetz-Text	*)
+					|
+					ElemUndef :		verweis :	pName ;
+					END ;
+
+					name :	ARRAY [0..256] OF CHAR ;		(* Länge dynamisch *)
+				END ;
+
+VAR
+	AktQuelle,
+	AktTextZeile,
+	AktWoerterbuch,
+	quelle0,
+	QuellZeile0,
+	woerterbuch0,
+	AktWB,
+	AktSegmWB,
+	CzoneWB,
+	InclDateien,
+	MakroWB,
+	AktMakro,
+	ErsWB :			pName ;
+
+	NeuAngelegt :		BOOLEAN ;	(* nach NamenEintragen etc. *)
+
+	NameGefunden :		BOOLEAN ;	(* nach WBsuchen *)
+
+	WarVerweis :		BOOLEAN ;	(* nach NamenSuchen *)
+
+
+%IF %NOT WEB %THEN
+
+PROCEDURE WBeintragen (VAR WB : pName ; Name : ARRAY OF CHAR) : pName ;
+
+
+
+PROCEDURE NamenSuchen (Name : ARRAY OF CHAR) : pName ;
+
+PROCEDURE NamenEintragen (Name : ARRAY OF CHAR) : pName ;
+
+PROCEDURE CZONEeintragen (Name : ARRAY OF CHAR) : pName ;
+
+PROCEDURE INCLeintragen (Name : ARRAY OF CHAR) : pName ;
+
+PROCEDURE WoerterbuchEintragen (Name : ARRAY OF CHAR) : pName ;
+
+PROCEDURE QuelleEintragen (Name : ARRAY OF CHAR) : pName ;
+
+PROCEDURE ZeileSuchen (adr : SpeicherAdresse) : pName ;
+
+PROCEDURE ZeilenText (adr : CARDINAL ; VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetNextZeile (VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetFirstZeile (VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE ZeileEintragen (adr : SpeicherAdresse ; text : ARRAY OF CHAR) : pName ;
+
+PROCEDURE ExternNamenEintragen (Name : ARRAY OF CHAR ; verweis : pName) : pName ;
+
+
+PROCEDURE GetNextREPLzeile (VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetFirstREPLzeile (VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE REPLeintragen (zeile : ARRAY OF CHAR) ;
+
+PROCEDURE REPLloeschen ;
+
+
+PROCEDURE GetNextWIEDzeile (VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetFirstWIEDzeile (VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE WIEDeintragen (zeile : ARRAY OF CHAR) ;
+
+PROCEDURE WIEDloeschen ;
+
+
+PROCEDURE ErsetzungEintragen (Name : ARRAY OF CHAR ; Inhalt : ARRAY OF CHAR) : pName ;
+
+PROCEDURE PutErsetzungsInhalt (p : pName ; inhalt : ARRAY OF CHAR) ;
+
+PROCEDURE GetErsetzungsInhalt (Name : ARRAY OF CHAR ; VAR inhalt : ARRAY OF CHAR) ;
+
+
+
+PROCEDURE MakroErzeugen (name : ARRAY OF CHAR) ;
+
+PROCEDURE MAKROzeileEintragen (zeile : ARRAY OF CHAR) ;
+
+PROCEDURE MakroName (name : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetNextMAKROzeile (VAR zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+
+
+PROCEDURE NamenLoeschen (VAR name0 : pName) ;
+
+PROCEDURE AlleNamenLoeschen ;
+
+%END
+
+END Namen.

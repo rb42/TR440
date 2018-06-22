@@ -1,0 +1,26 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE OktadenTransport;
+
+(*	12.12.15	*)
+
+FROM Struktur IMPORT
+	SpeicherAdresse ;
+
+
+PROCEDURE InitOktaden ;
+
+PROCEDURE GetOktade (oadr : CARDINAL) : CARDINAL8 ;
+
+PROCEDURE PutOktade (oadr : SpeicherAdresse ; oktade : CARDINAL8) ;
+
+PROCEDURE AbschlussOktaden ;
+
+
+END OktadenTransport.

@@ -1,0 +1,21 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE TerminalEingabe;
+
+(*	06.04.18	*)
+
+
+PROCEDURE ReadString (VAR str : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE InitSimulation (dateiname : ARRAY OF CHAR) ;
+
+PROCEDURE AusgabeBeginn ;
+
+
+END TerminalEingabe.

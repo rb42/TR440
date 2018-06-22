@@ -1,0 +1,27 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SSR_7;
+
+(*	28.01.16	*)
+
+
+PROCEDURE _SSR_7_0 ;
+
+PROCEDURE _SSR_7_4 ;
+
+PROCEDURE _SSR_7_8 ;
+
+PROCEDURE _SSR_7_12 ;
+
+PROCEDURE _SSR_7_16 ;
+
+PROCEDURE _SSR_7_20 ;
+
+
+END SSR_7.

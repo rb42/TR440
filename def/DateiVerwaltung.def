@@ -1,0 +1,127 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE DateiVerwaltung;
+
+(*	13.06.18	*)
+
+FROM DateiBearbeitung IMPORT
+	tDateityp ;
+
+CONST
+
+	_OEFDB =	'&OEFDB' ;
+	_STDDB =	'&STDDB' ;
+	_PROTO =	'&PROTO' ;
+
+	_USER =		'#-USER-#' ;		(* Vorspann temporaerer Verzeichnisname, falls /U angegeben :  C:\TR440\#-USER-#001\&STDDB  etc.	*)
+
+	_LFD =		'#-LFD-#\' ;		(* nur zum Einschleusen mit BKZ etc. *)
+	_WSP =		'#-WSP-#\' ;		(* nur zum Einschleusen mit EXDKZ [BKZ] etc. *)
+
+
+TYPE
+
+	tTreeZustand =	(TreeOK, tDBN, tLFD, tLFDbkz, tWSP, tWSPexdkz, tWSPbkz, tWSPexdkzBKZ) ;
+
+	pEinschleusDatei =	POINTER TO tEinschleusDatei ;
+
+	tEinschleusDatei =	RECORD
+					next :		pEinschleusDatei ;
+					datenbasis :	ARRAY [0..5] OF CHAR ;
+					dateiname :	ARRAY [0..11] OF CHAR ;
+					genvnr :	CARDINAL ;
+					bkz :		ARRAY [0..5] OF CHAR ;
+					exdkz :		ARRAY [0..5] OF CHAR ;
+					Extension :	ARRAY [0..5] OF CHAR ;
+					lfd :		BOOLEAN ;
+				END ;
+
+VAR
+	Datentraeger :		ARRAY [0..255] OF CHAR ;	(* aus Registry  HKCU\Software\seb\TR440 - Datenhaltung=  , Voreinstellung :  C:\TR440\ *)
+
+	UserTemporaer :		ARRAY [0..15] OF CHAR = '' ;		(* aus Kommandoswitch /Unnn  : #-USER-#\ [nnn\]	*)
+
+	TreeZustand :		tTreeZustand ;				(* nach Aufruf von GetExternDateiNamen	*)
+
+	dateiFS :		CARDINAL ;				(* Fehlerschluessel, wenn TreeZustand <> TreeOK *)
+
+	dateiFStext :		ARRAY [0..63] OF CHAR ;			(* Fehlertext dazu *)
+
+	Einschleus0 :		pEinschleusDatei = NIL ;
+
+	lastBKZ,
+	lastEXDKZ,
+	lastExtension :		ARRAY [0..5] OF CHAR ;		(* nach GetExternDateinamen / GetEchtenDateinamen / Einschleusen *)
+	lastLFD :		BOOLEAN ;
+
+	DatentraegerOk :		BOOLEAN = TRUE ;
+
+	BKZschreibBerechtigung :	ARRAY [0..5] OF CHAR = '' ;
+
+	FSdateiverwaltung :	CARDINAL ;
+
+
+
+PROCEDURE CreateSTDDB ;
+
+PROCEDURE DeleteSTDDB ;
+
+PROCEDURE CreatePROTO ;
+
+PROCEDURE CreateBKZ ;
+
+PROCEDURE CreateDatenbasis (DBN : ARRAY OF CHAR ; DBA : CARDINAL) ;
+
+PROCEDURE DeleteDatenbasis (DBN : ARRAY OF CHAR) ;
+
+PROCEDURE DeleteOperatorlaufDatenbasen ;
+
+
+PROCEDURE GetEchtenDatenbasisNamen (DBN : ARRAY OF CHAR ; VAR str : ARRAY OF CHAR) : tTreeZustand ;
+
+PROCEDURE Einschleusen (dbnam, datnam, bkznam, exdkznam : ARRAY OF CHAR ; genvnr : CARDINAL ; lfd : BOOLEAN) ;
+
+PROCEDURE Ausschleusen (dbnam, datnam : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE alleAusschleusen (dbnam : ARRAY OF CHAR ; VTDT : CARDINAL8) ;
+
+
+PROCEDURE DateiSchreibSchutz (datnam : ARRAY OF CHAR) : BOOLEAN ;
+
+
+PROCEDURE GetLokalDateinamen (dbnam, datnam : ARRAY OF CHAR ; VAR dateiname : ARRAY OF CHAR) : tTreeZustand ;
+
+PROCEDURE GetExternDateinamen (datnam, bkz, exdkz : ARRAY OF CHAR ; VAR dateiname : ARRAY OF CHAR ; lfd : BOOLEAN) : tTreeZustand ;
+
+PROCEDURE GetEchtenDateinamen (dbnam, datnam : ARRAY OF CHAR ; VAR dateiname : ARRAY OF CHAR) : tTreeZustand ;
+
+
+PROCEDURE DateiExistiert (dateiname : ARRAY OF CHAR ; VAR INOUT GENVNR : CARDINAL) : BOOLEAN ;
+
+PROCEDURE DateiKreieren (datnam : ARRAY OF CHAR ; GENVNR : CARDINAL) : BOOLEAN ;
+
+PROCEDURE DateiLoeschen (dateiname : ARRAY OF CHAR ; GENVNR : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE GENVNRtoZahl (str : ARRAY OF CHAR) : CARDINAL ;
+
+PROCEDURE GENVNRausZahl (zahl : CARDINAL ; VAR GENVNR : ARRAY OF CHAR) ;
+
+PROCEDURE MakeExtension (GENVNR : CARDINAL ; VAR ext : ARRAY OF CHAR) ;
+
+PROCEDURE AppendExtension (GENVNR : CARDINAL ; VAR INOUT dateiname : ARRAY OF CHAR) ;
+
+
+PROCEDURE CheckDateinamen (VAR INOUT dateiname : ARRAY OF CHAR) : BOOLEAN ;
+
+
+PROCEDURE CheckDatentraeger () : BOOLEAN ;		(* alle Standard-Verzeichnisse kreieren *)
+
+
+END DateiVerwaltung.

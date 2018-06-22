@@ -1,0 +1,57 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE GDIdruck;
+
+(*	26.03.18	*)
+
+
+VAR
+	MaxDruckZeilen :	INTEGER ;
+
+
+PROCEDURE OpenGDIdrucker (name : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE CloseGDIdrucker ;
+
+PROCEDURE ZeilenAnfang ;
+
+PROCEDURE ZeichenAusgeben (zeile : ARRAY OF CHAR) ;
+
+PROCEDURE ZeilenEndeAusgeben ;
+
+PROCEDURE CRausgeben ;
+
+PROCEDURE Vorschub (Zeilenzahl : INTEGER) ;
+
+PROCEDURE Ausstuelpen ;
+
+PROCEDURE SetFontZeilenAbstand ;
+
+PROCEDURE SeitenWechselAusgeben ;
+
+PROCEDURE SeitenAnfangAusgeben ;
+
+PROCEDURE SetZeilenAbstand (ZeilenAbstand : CARDINAL) ;
+
+PROCEDURE GesamtInitialisierung ;
+
+PROCEDURE SetDefaultFontAktuell (fontname : ARRAY OF CHAR) ;
+
+PROCEDURE JobInit (dateiname : ARRAY OF CHAR) ;
+
+PROCEDURE TeilInitialisierung (mitInitString : BOOLEAN) ;
+
+PROCEDURE TeilExit ;
+
+PROCEDURE JobExit ;
+
+
+
+END GDIdruck.
+

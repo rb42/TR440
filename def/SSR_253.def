@@ -1,0 +1,74 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SSR_253;
+
+(*	19.12.15	*)
+
+
+PROCEDURE _SSR_253_1 ;
+
+PROCEDURE _SSR_253_2 ;
+
+PROCEDURE _SSR_253_3 ;
+
+PROCEDURE _SSR_253_4 ;
+
+PROCEDURE _SSR_253_5 ;
+
+PROCEDURE _SSR_253_6 ;
+
+PROCEDURE _SSR_253_7 ;
+
+PROCEDURE _SSR_253_8 ;
+
+PROCEDURE _SSR_253_9 ;
+
+PROCEDURE _SSR_253_10 ;
+
+PROCEDURE _SSR_253_11 ;
+
+PROCEDURE _SSR_253_12 ;
+
+PROCEDURE _SSR_253_13 ;
+
+PROCEDURE _SSR_253_14 ;
+
+PROCEDURE _SSR_253_15 ;
+
+PROCEDURE _SSR_253_16 ;
+
+PROCEDURE _SSR_253_17 ;
+
+PROCEDURE _SSR_253_18 ;
+
+PROCEDURE _SSR_253_19 ;
+
+PROCEDURE _SSR_253_20 ;
+
+PROCEDURE _SSR_253_21 ;
+
+PROCEDURE _SSR_253_22 ;
+
+PROCEDURE _SSR_253_23 ;
+
+PROCEDURE _SSR_253_24 ;
+
+PROCEDURE _SSR_253_25 ;
+
+PROCEDURE _SSR_253_26 ;
+
+PROCEDURE _SSR_253_27 ;
+
+PROCEDURE _SSR_253_32 ;
+
+PROCEDURE _SSR_253_39 ;
+
+PROCEDURE _SSR_253_40 ;
+
+END SSR_253.

@@ -1,0 +1,39 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE ZC1;
+
+(*	26.03.18	*)
+
+
+CONST
+	ZC1_NL6 =	CHR(16) ;
+	ZC1_NL5 =	CHR(17) ;
+	ZC1_NL4 =	CHR(18) ;
+	ZC1_NL3 =	CHR(19) ;
+	ZC1_NL2 =	CHR(20) ;
+	ZC1_NL =	CHR(21) ;
+	ZC1_CR =	CHR(22) ;
+	ZC1_NF =	CHR(23) ;
+	ZC1_VT =	CHR(24) ;
+	ZC1_VT3 =	CHR(25) ;
+	ZC1_VT4 =	CHR(26) ;
+	ZC1_VT5 =	CHR(27) ;
+	ZC1_VT6 =	CHR(28) ;
+	ZC1_VT7 =	CHR(29) ;
+	ZC1_VT8 =	CHR(30) ;
+	ZC1_NL7 =	CHR(31) ;
+	ZC1_EM =	CHR(33) ;
+
+VAR
+
+	ZC1toANSI,
+	ANSItoZC1 :	ARRAY CHAR OF CHAR ;
+
+
+END ZC1.

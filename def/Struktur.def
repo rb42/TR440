@@ -1,0 +1,478 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Struktur;
+
+(*	20.06.18	*)
+
+FROM SYSTEM IMPORT
+	CAST ;
+
+FROM Register IMPORT
+	reg48, tRegBlock ;
+
+
+<*/ValidVersion:Dreierprobe*>
+<*/NoVersion:Dreierprobe*>
+
+
+CONST
+	MaxSeitenNummer =	2047 ;								(* maximaler Adressraum 0..3FFFFFH = 2 M Worte	*)
+
+	MaxKachelNummer =	4095 ;								(* maximaler phys. mapbarer Speicher 4 M Worte	*)
+
+	MaxGanzwortInSeite =	1023 ;								(* Seitengröße in Ganzworten			*)
+
+	MaxHalbwortInSeite =	2047 ;								(* Adressierung Halbwort-weise			*)
+
+	MaxSeiteInGrossSeite =	31 ;
+
+	MaxGrossSeitenNummer =	63 ;
+
+	MaxLeitblockNummer =	31 ;								(* Anzahl Leitblock-Elemente pro Großseite	*)
+
+	MaxGanzwortNummer =	(MaxSeitenNummer + 1) * (MaxGanzwortInSeite + 1) - 1 ;		(* gesamter Adressraum = 0..1FFFFF Ganzworte	*)
+
+	HalbworteInSeite =	MaxHalbwortInSeite + 1 ;
+
+	HalbworteInGrossSeite =	HalbworteInSeite * (MaxSeiteInGrossSeite + 1) ;			(* Anzahl Halbworte in einer Großseite = 10000H	*)
+
+
+	TasQuellExtension =	'.TAS' ;
+
+	TasListingExtension =	'.TLST' ;
+
+	TasTraceExtension =	'.TRAC' ;
+
+	KdoExtension =		'.KDO' ;
+
+
+
+
+TYPE
+	Halbwort =		ARRAY [0..2] OF CARDINAL8 ;
+
+
+	Wort6Bytes =		ARRAY [0..5] OF CARDINAL8 ;
+
+	Ganzwort =		RECORD
+
+%IF Dreierprobe %THEN
+					BITFIELDS
+						DP :		CARDINAL BY 2 ;
+						TK :		CARDINAL BY 2 ;
+					END ;
+%ELSE
+					TK :			CARDINAL8 ;
+%END
+
+(*
+					reserve :	CARDINAL8 ;		(* falls 8 Bytes pro Ganzwort belegen *)
+*)
+					CASE : BOOLEAN OF
+					TRUE :
+						hi,
+						lo :		Halbwort ;
+					ELSE
+						byte6 :		Wort6Bytes ;
+					END ;
+
+				END ;
+
+	SpeicherAdresse =	[0..MaxGanzwortNummer * 2 + 1] ;				(* Adressen bis 3FFFFF möglich *)
+
+	GanzwortNummer =	[0..MaxGanzwortNummer] ;
+
+	SeitenNummer =		[0..MaxSeitenNummer] ;
+
+	KachelNummer =		[0..MaxKachelNummer] ;
+
+	GrossSeitenNummer =	[0..MaxGrossSeitenNummer] ;
+
+	LeitblockNummer =	[0..MaxLeitblockNummer] ;
+
+	tAchtelSeite =		ARRAY [0..(MaxGanzwortInSeite + 1) DIV 8 - 1] OF Ganzwort ;
+	pAchtelSeite =		POINTER TO tAchtelSeite ;
+
+	Seite =			ARRAY [0..MaxGanzwortInSeite] OF Ganzwort ;
+	pSeite =		POINTER TO Seite ;
+
+	GrossSeite =		ARRAY [0..MaxSeiteInGrossSeite] OF Seite ;
+
+	Kachel =		Seite ;
+
+	TeilLeitblock =		ARRAY LeitblockNummer OF
+					RECORD
+						BITFIELDS
+							zugeteilt :	BOOLEAN BY 1 ;
+							beschreibbar :	BOOLEAN BY 1 ;
+							kachel :	KachelNummer BY 14 ;
+						END ;
+					END ;
+
+
+	tLeitblock =		ARRAY GrossSeitenNummer OF TeilLeitblock ;
+	pLeitblock =		POINTER TO tLeitblock ;
+
+	GanzwortProc =		PROCEDURE (VAR Ganzwort) ;
+
+	HalbwortProc =		PROCEDURE (VAR Halbwort) ;
+
+(*
+	tHauptspeicher =	RECORD
+					CASE : INTEGER OF
+					0 :	Ganzworte :	ARRAY GanzwortNummer OF Ganzwort ;
+					|
+					1 :	GrossSeiten :	ARRAY GrossSeitenNummer OF GrossSeite ;
+					ELSE
+						Seiten :	ARRAY SeitenNummer OF Seite ;
+					END ;
+				END ;
+*)
+
+	OperatorNummer =	[0..10] ;
+
+	tSteuerInformation =	RECORD
+					Kopf :			RECORD
+									AbsOLK,
+									LNG,
+									TYP :	CARDINAL ;
+								END ;
+					Inhalt :		ARRAY [0..255] OF Ganzwort ;
+				END ;
+
+	tAlarmInformation =	RECORD
+					reg :			tRegBlock ;
+					STB1 :			CARDINAL ;
+					BefAlarm :		BOOLEAN ;
+					BC :			CARDINAL8 ;
+				END ;
+
+	tAuftrag =		RECORD
+					BEN :			ARRAY [0..29] OF CHAR ;
+					BKZ,
+					FKZ :			ARRAY [0..5] OF CHAR ;
+					Hierarchie :		ARRAY [0..7] OF CARDINAL64 ;
+				END ;
+
+	tOperator =		RECORD
+					OLK,
+					OLKV,
+					OLKE,
+					ProgrammEndeFehler,
+					AlarmAdresse,
+					UnterbrechungsAdresse,
+					AnzahlBefehle :		CARDINAL ;
+					AnzahlTakte :		CARDINAL64 ;
+					MVNR :			ARRAY [0..5] OF CHAR ;
+					ON,
+					OLN :			ARRAY [0..11] OF CHAR ;
+					SteuerInformation :	tSteuerInformation ;
+					AlarmInformation :	tAlarmInformation ;
+					ZustellungsSperre,
+					AlarmSperre,
+					ProgrammEnde :		BOOLEAN ;
+				END ;
+
+
+
+
+CONST
+
+	NILindex =		CAST (GanzwortNummer, 	    7FFFFFH) ;		(* unzulässige GanzwortNummer *)
+
+	NILhalbwort =					   1FFFFFFH ;		(* unzulässiger Halbwort-Inhalt *)
+
+	NILganzwort =		CAST (CARDINAL64, 7FFFFFFFFFFFFFFFH) ;		(* unzulässiger Ganzwort-Inhalt *)
+
+
+	Cardinal64Bit =		CAST (CARDINAL64,0FFFFFFFFFFFFFFFFH) ;
+
+
+	MarkenBit =		CAST (CARDINAL64,     800000000000H) ;
+
+	MarkenBitWeg =		CAST (CARDINAL64,     7FFFFFFFFFFFH) ;
+
+	VorzeichenBit =		CAST (CARDINAL64,     400000000000H) ;
+
+
+	Vorzeichen48Bit =	CAST (CARDINAL64,    0C00000000000H) ;
+
+	Max48bitWertPositiv =	CAST (CARDINAL64,     3FFFFFFFFFFFH) ;
+
+	Negativ48Bit =		CAST (CARDINAL64,0FFFFC00000000000H) ;
+
+	Cardinal48Bit =		CAST (CARDINAL64,    0FFFFFFFFFFFFH) ;
+
+	HighbyteMaske48Bit =	CAST (CARDINAL64,0FFFF00FFFFFFFFFFH) ;
+
+	Cardinal24Bit =				    	   0FFFFFFH  ;
+
+
+	MantissenMaske =	CAST (CARDINAL64,0FFFFFFFFFFFFFF00H) ;
+
+	ExponentenMaske =	CAST (CARDINAL64,000000000000000FFH) ;
+
+
+	Vorzeichen24Bit =				    800000H  ;
+
+	Max24bitWertPositiv =				    3FFFFFH  ;
+
+	Negativ24bit =		CAST (CARDINAL64,0FFFFFFFFFFC00000H) ;
+
+
+	Vorzeichen16Bit =				      8000H  ;
+
+	Max16bitWertPositiv =				      7FFFH  ;
+
+	Negativ16bit =		CAST (CARDINAL64,0FFFFFFFFFFFF8000H) ;
+
+
+	Vorzeichen8Bit =					80H  ;
+
+	Max8bitWertPositiv =					7FH  ;
+
+	Negativ8bit =		CAST (CARDINAL64,0FFFFFFFFFFFFFF80H) ;
+
+
+	TakteProMikroSekunde =	16 ;
+
+
+VAR
+	SeitenKachelTabelle :	tLeitblock ;
+
+	KachelBelegt,
+	zwKachelBelegt :	ARRAY KachelNummer OF BOOLEAN ;
+
+	Operatoren :		ARRAY OperatorNummer OF tOperator ;
+
+	AktAuftrag :		tAuftrag ;
+
+	AktOperator :		OperatorNummer ;
+
+	OLKpegel,
+	AktOLK :		CARDINAL ;
+
+	KSP,
+	Hauptspeicher :		ARRAY KachelNummer OF pSeite ;
+
+	KSPanz,
+	KSPmax,
+	AktMaxGanzwortNummer,
+	AktAnzahlGrossSeiten,
+	AktMaxBelegteGrossSeite :	CARDINAL ;
+
+	AktSchreibschutz :	BOOLEAN = FALSE ;
+
+	SchreibschutzAktiv :	BOOLEAN = TRUE ;
+
+	AbschnittsModus :	BOOLEAN = FALSE ;
+
+	ProgrammierModus :	BOOLEAN = FALSE ;
+
+	AktTypenkennung :	CARDINAL8 ;
+
+%IF Dreierprobe %THEN
+	AktDreierprobe :	CARDINAL8 = 0 ;
+%END
+
+	NeueTypenkennung :	CARDINAL = 4 ;
+
+	Bitmasken48 :		ARRAY [1..48] OF CARDINAL64 ;		(* Masken Bits für 48-Bit-Werte von links 1..48 gezählt *)
+	Bitmasken24 :		ARRAY [1..24] OF CARDINAL32 ;		(* dto. für 24-Bit-Werte *)
+	Bitmasken16 :		ARRAY [1..16] OF CARDINAL16 ;		(* dto. für 16-Bit-Werte *)
+	Bitmasken8 :		ARRAY [1..8] OF CARDINAL8 ;		(* dto. für 8-Bit-Werte *)
+
+	ShiftFaktoren :		ARRAY [1..48] OF CARDINAL64 ;		(* für Shiften um 1..48 Bits (multiplizieren für Links-Shift) *)
+
+	TKalarmErkannt,
+	BUEalarmErkannt,
+	TKalarmGewesen,
+	BUEalarmGewesen,
+	SpeicherschutzAlarmGewesen,
+	BefehlsAlarmGewesen,
+	UalarmGewesen,
+	AlarmGewesen,
+	KBbefehlGewesen,
+	MakroAlarm,
+	RZSueberlaufGewesen,
+	AlleProgrammeAbbrechen,
+	globProgrammEnde :	BOOLEAN = FALSE ;
+
+	Signale :		CARDINAL64 ;
+
+	MerkReladr,
+	MerkRegF,
+	MerkBefehlscode,
+	MerkAdressteil :	CARDINAL ;				(* vom Erkennen des Alarms *)
+
+	GesamtZahlTakte :	CARDINAL64 ;
+
+%IF WEB %THEN
+	MaximalZahlTakte :	CARDINAL64 = 320000000 ;		(* max. 20 Sek. TR440-CPU im WEB *)
+%ELSE
+	MaximalZahlTakte :	CARDINAL64 = 7FFFFFFFFFFFFFFFH ;	(* Maximal sonst *)
+%END
+	InsgesamtZahlTakte :	CARDINAL64 = 0 ;
+
+PROCEDURE NullBefehl ;
+
+
+PROCEDURE Takte (anz : CARDINAL) ;
+
+
+PROCEDURE SpeicherReservieren (AnzahlGrossSeiten : CARDINAL) ;
+
+PROCEDURE StdLeitblock ;						(* alle Schreibschütze etc. weg *)
+
+PROCEDURE LeitblockFreigeben ;
+
+PROCEDURE KachelBelegen () : KachelNummer ;
+
+PROCEDURE KachelFreigeben (k : KachelNummer) ;
+
+PROCEDURE Vorbes2 ;							(* Normal-KSP komplett vorbesetzen *)
+
+PROCEDURE SetProtect (adresse : SpeicherAdresse; protected : BOOLEAN) ;	(* Schreibschutz für die zugehörige Seite ja/nein *)
+
+PROCEDURE SetExist (adresse : SpeicherAdresse; existent : BOOLEAN) ;	(* Existenz für die zugehörige Seite ja/nein *)
+
+PROCEDURE GetSeitenAdresse (reladr : SpeicherAdresse) : pSeite ;	(* Pointer auf Seiteninhalt oder NIL *)
+
+PROCEDURE TestAdresse (reladr : SpeicherAdresse) : BOOLEAN ;
+
+PROCEDURE SpeicherZuordnung (reladr : SpeicherAdresse ; echteAdresse : pSeite ; Schreibschutz : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE SpeicherZuordnungWeg (reladr : SpeicherAdresse) : BOOLEAN ;
+
+
+PROCEDURE RegFbesetzen (neuerWert : CARDINAL) ;
+
+PROCEDURE XbasisPruefen ;
+
+PROCEDURE SuchOperator (OLK : CARDINAL) : OperatorNummer ;
+
+
+PROCEDURE GetGanzwortU (reladr : SpeicherAdresse ; VAR ziel : Ganzwort) ;
+
+PROCEDURE PutGanzwortU (reladr : SpeicherAdresse ; VAR quelle : Ganzwort) ;
+
+PROCEDURE ZuwGanzwort (VAR ziel : Ganzwort ; typenkennung : CARDINAL8 ; wert : CARDINAL64) ;
+
+
+PROCEDURE GetGanzwort (reladr : SpeicherAdresse) : CARDINAL64 ;
+
+PROCEDURE GetSechstelwort (reladr : SpeicherAdresse) : CARDINAL8 ;
+
+PROCEDURE GetDrittelwort (reladr : SpeicherAdresse) : CARDINAL16 ;
+
+PROCEDURE GetHalbwort (reladr : SpeicherAdresse) : CARDINAL ;
+
+PROCEDURE GetBefehlsWort (reladr : SpeicherAdresse) : CARDINAL ;
+
+PROCEDURE ManipHalbwort (reladr : SpeicherAdresse ; p : HalbwortProc) ;
+
+
+PROCEDURE ZuwHalbwort (VAR hw : Halbwort ; wert : CARDINAL) ;
+
+PROCEDURE PutSechstelwort (reladr : SpeicherAdresse; wert: CARDINAL8) ;
+
+PROCEDURE PutDrittelwort (reladr : SpeicherAdresse; wert: CARDINAL16) ;
+
+PROCEDURE PutHalbwort (reladr : SpeicherAdresse; wert: CARDINAL) ;
+
+PROCEDURE PutGanzwort (reladr : SpeicherAdresse; typenkennung : CARDINAL8 ; wert: CARDINAL64) ;
+
+PROCEDURE ManipGanzwort (reladr : SpeicherAdresse ; p : GanzwortProc) ;
+
+PROCEDURE PutBefehlsWort (reladr : SpeicherAdresse ; inh : CARDINAL) ;
+
+PROCEDURE PutCodeWort (reladr : SpeicherAdresse ; inh : CARDINAL) ;
+
+PROCEDURE PutCodeGanzwort (reladr : SpeicherAdresse; typenkennung : CARDINAL8 ; wert: CARDINAL64) ;
+
+PROCEDURE GetStringAusSpeicher (VAR ziel : ARRAY OF CHAR ; reladr : SpeicherAdresse; lng : CARDINAL) ;
+
+PROCEDURE PutStringInSpeicherU (quelle : ARRAY OF CHAR ; reladr : SpeicherAdresse; lng : CARDINAL) ;	(* ANSI -> ZC1 *)
+
+PROCEDURE PutStringInSpeicher (quelle : ARRAY OF CHAR ; reladr : SpeicherAdresse; lng : CARDINAL) ;	(* dto. Ignore ist Abschluss *)
+
+PROCEDURE PutStringInGanzwortSpeicher (quelle : ARRAY OF CHAR ; reladr : SpeicherAdresse; lng : CARDINAL) ;	(* ANSI -> ZC1 *)
+
+
+PROCEDURE PutStringInRegister (quelle : ARRAY OF CHAR ; VAR reg : reg48) ;				(* ANSI -> ZC1 *)
+
+PROCEDURE GetStringAusRegister (reg : reg48 ; VAR ziel : ARRAY OF CHAR) ;
+
+
+PROCEDURE extLiesHalbwort (hw : Halbwort) : CARDINAL ;
+
+PROCEDURE extLiesGanzwort (wert : Wort6Bytes) : CARDINAL64 ;
+
+PROCEDURE GetStringAusGanzwort (quelle : Ganzwort ; VAR str : ARRAY OF CHAR) ;
+
+
+PROCEDURE GetAchtelSeite (quelle : SpeicherAdresse ; VAR as : tAchtelSeite) ;
+
+PROCEDURE PutAchtelSeite (ziel : SpeicherAdresse ; VAR as : tAchtelSeite) ;
+
+
+PROCEDURE zt0 (VAR GW : Ganzwort) ;
+
+PROCEDURE zt1 (VAR GW : Ganzwort) ;
+
+PROCEDURE zt2 (VAR GW : Ganzwort) ;
+
+PROCEDURE zt3 (VAR GW : Ganzwort) ;
+
+
+PROCEDURE mod2Check ;
+
+PROCEDURE mod2Ohne ;
+
+
+PROCEDURE CheckMarke (VAR reg : reg48) ;
+
+PROCEDURE CheckUeberlauf (reg : reg48) ;
+
+
+PROCEDURE SpeicherschutzAlarm (art : ARRAY OF CHAR ; reladr : SpeicherAdresse) ;
+
+PROCEDURE TypenkennungsAlarm (reladr : SpeicherAdresse) ;
+
+PROCEDURE BefehlsAlarm ;
+
+PROCEDURE ArithmetischerAlarm ;
+
+PROCEDURE U_Alarm ;
+
+PROCEDURE ArithmetischerAlarm2 ;
+
+PROCEDURE TypenkennungsAlarm2 ;
+
+
+PROCEDURE GetIndexZellenWert (index : CARDINAL8) : CARDINAL ;
+
+PROCEDURE PutIndexZellenWert (index : CARDINAL8 ; wert : CARDINAL) ;
+
+PROCEDURE ClearAssocIndex ;
+
+PROCEDURE InitAssocIndex ;
+
+
+PROCEDURE CheckKSPbelegung ;
+
+
+PROCEDURE GetRegisterWertHW (adrteil : CARDINAL8) : CARDINAL ;
+
+
+PROCEDURE InitSpeicher ;
+
+
+
+END Struktur.

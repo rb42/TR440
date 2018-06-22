@@ -1,0 +1,44 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE TeilwortArithmetik;
+
+(*	20.11.15	*)
+
+PROCEDURE _VEL ;
+
+PROCEDURE _AUT ;
+
+PROCEDURE _ET ;
+
+PROCEDURE _ZUS ;
+
+PROCEDURE _VLA ;
+
+PROCEDURE _ATA ;
+
+PROCEDURE _ETA ;
+
+PROCEDURE _A2 ;
+
+PROCEDURE _SB2 ;
+
+PROCEDURE _M2 ;
+
+PROCEDURE _M2N ;
+
+PROCEDURE _M2R ;
+
+PROCEDURE _M2NR ;
+
+PROCEDURE _AT ;
+
+PROCEDURE _SBT ;
+
+
+END TeilwortArithmetik.

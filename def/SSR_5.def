@@ -1,0 +1,39 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SSR_5;
+
+(*	28.01.16	*)
+
+
+PROCEDURE _SSR_5_0 ;
+
+PROCEDURE _SSR_5_4 ;
+
+PROCEDURE _SSR_5_8 ;
+
+PROCEDURE _SSR_5_12 ;
+
+PROCEDURE _SSR_5_16 ;
+
+PROCEDURE _SSR_5_20 ;
+
+PROCEDURE _SSR_5_24 ;
+
+PROCEDURE _SSR_5_28 ;
+
+PROCEDURE _SSR_5_32 ;
+
+PROCEDURE _SSR_5_40 ;
+
+PROCEDURE _SSR_5_44 ;
+
+PROCEDURE _SSR_5_48 ;
+
+
+END SSR_5.

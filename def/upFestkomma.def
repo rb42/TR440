@@ -1,0 +1,100 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE upFestkomma;
+
+(*	07.02.16	*)
+
+
+FROM Register IMPORT
+	tVgl ;
+
+TYPE
+	B1_INT48 = [0..0FFFFFFFFFFFFH] ;			(* TR440-48bit-Festkommazahl im B-1 - Komplement *)
+
+	B1_INT24 = [0..0FFFFFFH] ;				(* TR440-24bit-Festkommazahl im B-1 - Komplement *)
+
+
+PROCEDURE trAdd (TK : CARDINAL8; a, b : B1_INT48) : B1_INT48 ;
+
+PROCEDURE trSub (TK : CARDINAL8; a, b : B1_INT48) : B1_INT48 ;
+
+PROCEDURE trInvert (a : B1_INT48) : B1_INT48 ;
+
+PROCEDURE trAbs (a : B1_INT48) : B1_INT48 ;
+
+PROCEDURE trMult (a, b : B1_INT48) : B1_INT48 ;
+
+PROCEDURE trNegativ (a : B1_INT48) : BOOLEAN ;
+
+PROCEDURE tr48Norm (a : B1_INT48) : B1_INT48 ;
+
+PROCEDURE tr8to48 (a : B1_INT24) : B1_INT48 ;
+
+PROCEDURE tr8to24 (a : B1_INT24) : B1_INT24 ;
+
+PROCEDURE tr16to48 (a : B1_INT24) : B1_INT48 ;
+
+PROCEDURE tr24to48 (a : B1_INT24) : B1_INT48 ;
+
+PROCEDURE trHW (a : B1_INT48) : B1_INT24 ;
+
+
+PROCEDURE GetP8 () : B1_INT24 ;
+
+
+PROCEDURE trAdd24 (a, b : B1_INT24) : B1_INT24 ;
+
+PROCEDURE trSub24 (a, b : B1_INT24) : B1_INT24 ;
+
+PROCEDURE trAbs24 (a : B1_INT24) : B1_INT24 ;
+
+PROCEDURE trInvert24 (a : B1_INT24) : B1_INT24 ;
+
+
+PROCEDURE trCard32to48 (a : CARDINAL32) : B1_INT48 ;
+
+PROCEDURE trCard64to48 (a : CARDINAL64) : B1_INT48 ;
+
+
+PROCEDURE trInt32to48 (a : INTEGER32) : B1_INT48 ;
+
+PROCEDURE trInt64to48 (a : INTEGER64) : B1_INT48 ;
+
+
+PROCEDURE tr48toInt32 (a : B1_INT48) : INTEGER32 ;
+
+PROCEDURE tr48toInt64 (a : B1_INT48) : INTEGER64 ;
+
+PROCEDURE tr24toInt32 (a : B1_INT24) : INTEGER32 ;
+
+
+PROCEDURE trUeberlauf48 (a : B1_INT48) : BOOLEAN ;
+
+PROCEDURE trUeberlauf24 (a : B1_INT24) : BOOLEAN ;
+
+
+PROCEDURE trVgl (a, b : B1_INT48) : tVgl ;
+
+PROCEDURE trVglAbs (a, b : B1_INT48) : tVgl ;
+
+
+PROCEDURE tr24Kleiner0 (a : B1_INT24) : BOOLEAN ;
+
+PROCEDURE tr24KleinerGleich0 (a : B1_INT24) : BOOLEAN ;
+
+PROCEDURE tr24Gleich0 (a : B1_INT24) : BOOLEAN ;
+
+PROCEDURE tr24Ungleich0 (a : B1_INT24) : BOOLEAN ;
+
+PROCEDURE tr24GroesserGleich0 (a : B1_INT24) : BOOLEAN ;
+
+PROCEDURE tr24Groesser0 (a : B1_INT24) : BOOLEAN ;
+
+
+END upFestkomma.

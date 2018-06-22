@@ -1,0 +1,53 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE debug;
+
+(*	20.06.18	*)
+
+FROM Register IMPORT
+	reg48 ;
+
+VAR
+	RegDump :		BOOLEAN = TRUE ;
+	Befehle :		BOOLEAN = TRUE ;
+	Einzelschritt :		BOOLEAN = TRUE ;
+	OriginalZeile :		BOOLEAN = TRUE ;
+	TakteZeigen :		BOOLEAN = TRUE ;
+	SSRprotokoll :		BOOLEAN = TRUE ;
+	BildschirmProtokoll:	BOOLEAN = TRUE ;
+	AlarmEin:		BOOLEAN = TRUE ;
+	EinBeiProgStart:	BOOLEAN = TRUE ;
+
+
+VAR
+	an :			BOOLEAN = TRUE ;
+	Lesen :			BOOLEAN = TRUE ;
+	Speichern :		BOOLEAN = TRUE ;
+	BefehlLesen :		BOOLEAN = TRUE ;
+	IndexWert :		BOOLEAN = TRUE ;
+	ZweitBefehle :		BOOLEAN = TRUE ;
+	AssoziativProtokoll :	BOOLEAN = TRUE ;
+	Dateien :		BOOLEAN = TRUE ;
+	AssemblerProtokoll :	BOOLEAN = TRUE ;
+	MemoryProtokoll:	BOOLEAN = TRUE ;
+
+
+PROCEDURE alle (ja : BOOLEAN) ;
+
+PROCEDURE InitRegDump ;
+
+PROCEDURE RegisterDumpen ;
+
+PROCEDURE Rmod1 ;
+
+PROCEDURE Rmod2 ;
+
+PROCEDURE aend48 (VAR vReg, Reg : reg48) : BOOLEAN ;
+
+END debug.

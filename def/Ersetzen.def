@@ -1,0 +1,37 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Ersetzen;
+
+(*	20.11.15	*)
+
+PROCEDURE _E ;
+
+PROCEDURE _EZ ;
+
+PROCEDURE _ENZ ;
+
+PROCEDURE _EMB ;
+
+PROCEDURE _MAB ;
+
+PROCEDURE _MABI ;
+
+PROCEDURE _MU ;
+
+PROCEDURE _EMU ;
+
+PROCEDURE _RLR ;
+
+PROCEDURE _R ;
+
+PROCEDURE _T ;
+
+
+
+END Ersetzen.

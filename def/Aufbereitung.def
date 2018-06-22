@@ -1,0 +1,31 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Aufbereitung;
+
+(*	20.11.15	*)
+
+PROCEDURE _US ;
+
+PROCEDURE _IR ;
+
+PROCEDURE _SH ;
+
+PROCEDURE _SHB ;
+
+PROCEDURE _VAQ ;
+
+PROCEDURE _NRM ;
+
+PROCEDURE _KDFR ;
+
+PROCEDURE _KFLD ;
+
+
+
+END Aufbereitung.

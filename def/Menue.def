@@ -1,0 +1,33 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Menue ;
+
+(*	10.06.18	*)
+
+
+VAR
+	Grundzustand :			BOOLEAN = TRUE ;
+
+	ProgrammEingabeBeginn :		BOOLEAN = FALSE ;
+
+	MenueBefehlStehtAn :		BOOLEAN = FALSE ;
+
+
+%IF %NOT WEB %THEN
+PROCEDURE Editor (dateiname : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE MenueBefehl () (* es hat sich was getan *) : BOOLEAN ;	(* muss aufgerufen werden, wenn 'MenueBefehlStehtAn' *)
+
+PROCEDURE InitMenue ;
+%END
+
+PROCEDURE SetGrundzustand (wert : BOOLEAN) ;
+
+
+END Menue.

@@ -1,0 +1,134 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE DateiBearbeitung;
+
+(*	29.03.18	*)
+
+
+FROM SYSTEM IMPORT
+	ADDRESS ;
+
+IMPORT FileFunc ;
+
+
+CONST
+	AnzahlStroeme =	32 ;
+
+
+TYPE
+	tDateityp =	(undefDatei, SEQdatei, RANdatei, RAMdatei, RASdatei, PHYSdatei) ;
+
+	tBetriebsart =	(BAundef, BAvorwaerts, BArueckwaerts, BAschreibend) ;
+
+	tDattr =	(DattrKSP, DattrPlatte, DattrTrommel, DattrMagnetband, DattrWechselplatte, DattrLFD) ;
+
+VAR
+	nurTR440dateien :	BOOLEAN = FALSE ;
+
+
+
+PROCEDURE MerkeInfo (DTT : tDateityp ; DL, WZ, D, Z, DATTR, EZ, E : CARDINAL ; bkz, exdkz : ARRAY OF CHAR) ;
+
+PROCEDURE SetDateityp (VAR datei : FileFunc.File) ;
+
+
+PROCEDURE GetDateityp (strmnr : CARDINAL) : tDateityp ;
+
+PROCEDURE GetDATTR (strmnr : CARDINAL) : tDattr ;
+
+
+PROCEDURE CheckInfoStrmnr (strmnr : CARDINAL) : BOOLEAN ;
+
+PROCEDURE CheckInfoDatnam (datnam : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetInfo (VAR dtb : ARRAY OF CHAR ; VAR genvnr, DTT, DL, WZ, D, Z, DATTR, EZ, E, SAETZE : CARDINAL ; VAR bkz, exdkz : ARRAY OF CHAR) ;
+
+
+PROCEDURE DateiOeffnen (datnam : ARRAY OF CHAR ; zumSchreiben : BOOLEAN) (*strmnr : *) : CARDINAL ;
+
+
+PROCEDURE GetStrom (extstrmnr : CARDINAL) : CARDINAL ;
+
+(*
+
+PROCEDURE SEQdateiEinlesen (strmnr : CARDINAL) : BOOLEAN ;
+
+PROCEDURE RANdateiEinlesen (strmnr : CARDINAL) : BOOLEAN ;
+
+PROCEDURE RAMdateiEinlesen (strmnr : CARDINAL) : BOOLEAN ;
+*)
+
+PROCEDURE SatzSuchen (strmnr : CARDINAL ; satznr : CARDINAL64) : BOOLEAN ;
+
+PROCEDURE SatzLesen (strmnr : CARDINAL ; satznr : CARDINAL64 ; VAR puffer : ARRAY OF CHAR ; VAR Laenge : CARDINAL) : BOOLEAN ;		(* exakt oder gar keinen Satz	*)
+
+(*
+PROCEDURE SatzLesenVorwaerts (strmnr : CARDINAL ; VAR INOUT satznr : CARDINAL ; VAR puffer : ARRAY OF CHAR) : BOOLEAN ;		(* exakt oder nächsten Satz	*)
+
+PROCEDURE SatzLesenRueckwaerts (strmnr : CARDINAL ; VAR INOUT satznr : CARDINAL ; VAR puffer : ARRAY OF CHAR) : BOOLEAN ;	(* exakt oder vorigen Satz	*)
+*)
+
+PROCEDURE SetPosition (strmnr : CARDINAL ; satznr : CARDINAL64) : BOOLEAN ;
+
+PROCEDURE SetPositionRelativ (strmnr : CARDINAL ; relativ : INTEGER) : BOOLEAN ;
+
+PROCEDURE GetPosition (strmnr : CARDINAL) : CARDINAL64 ;
+
+PROCEDURE GetDateiBuffer (strmnr : CARDINAL ; VAR SatzAdresse : ADDRESS ; VAR SatzLaenge : CARDINAL ; satznr : CARDINAL64) : BOOLEAN ;
+
+PROCEDURE letzterSatz (strmnr : CARDINAL) : BOOLEAN ;
+
+PROCEDURE GetErsteSatznr (strmnr : CARDINAL) : CARDINAL64 ;
+
+PROCEDURE GetLetzteSatznr (strmnr : CARDINAL) : CARDINAL64 ;
+
+PROCEDURE LueckeSuchen (strmnr : CARDINAL ; anzahl : CARDINAL) (* erster freier Satz mit Platz*) : CARDINAL64 ;
+
+
+PROCEDURE GetAktSatzIndexGW (strmnr : CARDINAL) : CARDINAL ;
+
+PROCEDURE SetAktSatzIndexGW (strmnr, satzindex : CARDINAL) ;
+
+PROCEDURE GetAktSatzLaengeGW (strmnr : CARDINAL) : CARDINAL ;
+
+
+PROCEDURE SetDBN (strmnr : CARDINAL ; DBN : ARRAY OF CHAR) ;
+
+
+PROCEDURE SetDateiBetriebsart (strmnr : CARDINAL ; Betriebsart : tBetriebsart) : BOOLEAN ;
+
+PROCEDURE GetDateiBetriebsart (strmnr : CARDINAL) : tBetriebsart ;
+
+
+PROCEDURE SatzSchreiben (strmnr : CARDINAL ; satznr : CARDINAL64 ; puffer : ARRAY OF CHAR) : BOOLEAN ;					(* darf auch überschreiben	*)
+
+PROCEDURE SatzLoeschen (strmnr : CARDINAL ; satznr : CARDINAL64) : BOOLEAN ;
+
+
+PROCEDURE SEQdateiSchreiben (strmnr : CARDINAL) : BOOLEAN ;
+
+PROCEDURE RANdateiSchreiben (strmnr : CARDINAL) : BOOLEAN ;
+
+PROCEDURE RAMdateiSchreiben (strmnr : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE PHYSlesen (strmnr, blocknr, AAOP, ANZ : CARDINAL) : BOOLEAN ;
+
+PROCEDURE PHYSschreiben (strmnr, blocknr, AAOP, ANZ : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE DateiSchliessen (strmnr : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE AlleEigenenDateienSchliessen ;
+
+PROCEDURE AlleDateienSchliessen ;
+
+
+END DateiBearbeitung.

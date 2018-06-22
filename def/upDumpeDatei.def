@@ -1,0 +1,20 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE upDumpeDatei;
+
+(*	25.03.18	*)
+
+PROCEDURE KonvertTR440datei (quelle : ARRAY OF CHAR ; VAR dateiname : ARRAY OF CHAR ; alsText : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE KonvertTR440gebiet (gebietsnummer : CARDINAL ; VAR dateiname : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE KonvertSatzNachExtern (VAR ZC1buffer, buffer : ARRAY OF CHAR ; laenge : CARDINAL) ;
+
+
+END upDumpeDatei.

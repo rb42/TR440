@@ -1,0 +1,69 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Assembler;
+
+(*	06.02.16	*)
+
+FROM Struktur IMPORT
+	SpeicherAdresse ;
+
+
+VAR
+	StartAdresse,
+	AlarmAdresse,
+	StartX,
+	StartU,
+	AktBefehlswort,
+	AblageAdresse,
+	AblageLaenge :		CARDINAL ;
+
+	frischAssembliert,
+	imInterpreter,
+	imLauf2 :		BOOLEAN ;
+
+	AktQuellName,
+	AktZeile :		ARRAY [0..267] OF CHAR ;
+
+	lastDateiname :	       	ARRAY [0..267] OF CHAR ;
+
+	ListingDirectory :	ARRAY [0..255] OF CHAR ;
+
+	PseudoGebiete :		ARRAY [0..255] OF CHAR ;
+
+
+%IF %NOT WEB %THEN
+
+PROCEDURE enthalten (str, such : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE InitAsm ;
+
+PROCEDURE Lauf1 (dateiname : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE Lauf2 () : BOOLEAN ;
+
+PROCEDURE InitProgrammlauf ;
+
+PROCEDURE Editor (dateiname : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetBefehlsZeile (zeile : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE Abspeichern (dateiname : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE IncAblageAdresse ;
+
+PROCEDURE GetZahl (str : ARRAY OF CHAR; VAR wert : CARDINAL) : BOOLEAN ;
+
+PROCEDURE InitProtokoll ;
+
+PROCEDURE ExitProtokoll ;
+
+PROCEDURE SyntaxWarnung (str : ARRAY OF CHAR) ;
+
+%END
+END Assembler.

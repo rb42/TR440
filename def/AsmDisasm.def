@@ -1,0 +1,226 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE AsmDisasm;
+
+(*	08.04.16	*)
+
+
+TYPE
+	tOpcode =
+		(
+
+			opNULL,	opXBA,	opMNA,	opMA,	opEMU,	opMU,	opBCL,	opTBC,	opMFUMXB,opMD,	opSZX,	opMF,	opTXX,	opTTX,	opMHX,	opHBPX,
+
+			opLZL,	opHBA,	opNL,	opVBA,	opMC,	opVBC,	opMCF,	opMCE,	opXCXCN,opXBAN,	opZX,	opSW,	opSLN,	opSNL,	opSL,	opSLL,
+
+			opMAB,	opSHB,	opWTV,	opWTR,	opSXI,	opSXGG,	opSXKG,	opSXN,	opEMB,	opE,	opENZ,	opEZ,	opHXP,	opMH,	opHXX,	opVXX,
+
+			opZMC,	opLMC,	opLMT,	opLC,	opSM,	opSMN,	opS,	opVSS,	opSU,	opTCB,	opSFB,	op_3B,	opHBC,	opMCFU,	opZU,	opMABI,
+
+			opAB,	opSBB,	opA,	opAC,	opSBI,	opSBD,	opSB,	opSBC,	opGSBI,	opAU,	opGAC,	opGA,	opGSBD,	opSBU,	opGSBC,	opGSB,
+
+			op_50,	op_51,	opGAB,	opGSBB,	opML,	opMLR,	opMLA,	opMAR,	opMLN,	opMNR,	opMAN,	opMANR,	opGMLN,	opGMAN,	opGML,	opGMLA,
+
+			opDV,	opDVD,	opDVI,	opVAQ,	opGDV,	opREZ,	opGDVI,	opB2VN,	opVEL,	opAUT,	opET,	opZUS,	opB3,	opB3V,	opB2,	opB2V,
+
+			opB,	opBD,	opBQ,	opBH,	opBB,	opBN,	opBR,	opBNR,	opM2N,	opM2NR,	opM2,	opM2R,	opA2,	opSB2,	opAQ,	opSBQ,
+
+			opC,	opCR,	opCMT,	opCMR,	opCN,	opCB,	opCD,	opCQ,	opVLA,	opATA,	opETA,	opLA,	opTXR,	opRXMRX,opBA,	opCH,
+
+			opST,	opSTN,	opZTR,	opSEGG,	opKDFR,	opKFLD,	opR,	opRT,	opAA,	opSBA,	opLR,	opSH,	opTRX,	opHALT,	opKB,	opNRM,
+
+			opC2,	opC3,	opCMC,	opBC,	opSI0,	opSKG0,	opSGG0,	opSN0,	opSAT,	opSAA,	opSK,	opSG,	opSI,	opSN,	opSKG,	opSGG,
+
+			opBL,	opVPU,	opSXR,	opSXRN,	opY,	opLEI,	opBCI,	opZI,	opSR,	opPDP,	opSRN,	opSSR,	opSE,	opSUE,	opBLEI,	opVMO,
+
+			op_C0,	op_C1,	op_C2,	op_C3,	op_C4,	op_C5,	op_C6,	op_C7,	opZT0,	opZT1,	opZT2,	opZT3,	opT,	op_CD,	opSXG,	opSXK,
+
+			opCU,	opBZN,	opZDP,	opBU,	opSG0,	opSK0,	op_D6,	op_D7,	opBZ2,	opBZ,	opBQB,	opCZ,	opBAR,	opBANR,	op_DE,	opBAN,
+
+			opRLR,	opIR,	op_E2,	opUS,	op_E4,	op_E5,	opBNZ,	opCNZ,	op_E8,	op_E9,	opTDM,	opTLD,	opTLI,	opTLOG,	opTMIN,	opTMAX,
+
+			opDA,	opDSB,	opDML,	opMLD,	opAT,	opSBT,	opBT,	opCT,	opWB,	opSBIT,	opSFBE,	opBSS,	opZK,	opTOK,	opQBR,	opQCR
+
+		) ;
+
+	tOpcodeSet =	SET OF tOpcode ;
+
+
+CONST
+	ErsetzBefehle = tOpcodeSet
+		{
+			opE, opEZ, opENZ, opEMB, opMAB, opMABI, opMU, opEMU, opRLR, opR
+		} ;
+	IndexBefehle = tOpcodeSet
+		{
+			opE, opEZ, opENZ, opEMB, opBNZ, opCNZ, opXCXCN, opTTX, opTXX, opTXR, opTRX, opWTV, opWTR, opZK,
+			opHBPX, opHXP, opHXX, opVXX, opZX, opZU, opSZX, opMF, opMFUMXB, opMD, opMH, opMHX, opRXMRX, opUS
+		} ;
+
+	GrossSeitenRelativ = tOpcodeSet
+		{
+			opS, opSAA, opSAT, opSFB, opSG, opSG0, opSGG, opSGG0, opSI, opSI0, opSK, opSKG0, opSM, opSMN, opSN, opSN0, opSR, opSRN, opSU,
+			opSXG, opSXGG, opSXI, opSXK, opSXKG, opSXN, opSXR, opSXRN
+		} ;
+
+	GrossSeite0Bezug = tOpcodeSet
+		{
+			opB, opBU, opBR, opBN, opBNR, opBB, opBQ, opBD, opBH, opBQB, opBZ, opBZN, opBT, opBZ2, opB2, opB2V, opB2VN, opB3, opB3V,
+			opBL, opBC, opBCI, opC, opCU, opCR, opCN, opCB, opCMT, opCMR, opCMC, opCQ, opCD, opCH, opCZ, opCT, opC2, opC3,
+			opTCB, opTBC, opBCL, opQBR, opQCR,
+			opA, opAB, opAC, opSB, opSBB, opSBC, opSBI, opSBD, opMLR, opMNR, opMAR, opMANR, opDV, opDVI, opDVD, opAQ, opSBQ, opML, opMLN, opMLA, opMAN,
+			opAA, opSBA,
+			opGA, opGAB, opGAC, opGSB, opGSBB, opGSBC, opGSBI, opGSBD, opGML, opGMLN, opGMLA, opGMAN, opGDV, opGDVI, opAU, opSBU, opREZ, opDA, opDSB, opDML, opMLD,
+			opVEL, opAUT, opET, opZUS, opVLA, opATA, opETA, opA2, opSB2, opM2, opM2N, opM2R, opM2NR, opAT, opSBT,
+			opHBC, opVBC, opHBA, opVBA,
+			opBA, opBAR, opBAN, opBANR, opXBA, opXBAN, opZT0, opZT1, opZT2, opZT3, opLC, opLMT, opLMC, opZMC, opZI,
+			opNULL, opWB, opSE, opSFBE, opSUE,
+			opPDP
+		} ;
+
+	RzweitCodeErlaubt = tOpcodeSet
+		{
+			opA, opA2, opAB, opAQ, opAT, opAU, opAUT,
+			opB, opB2, opB2V, opB2VN, opB3, opB3V, opBB, opBD, opBH, opBN, opBNR, opBQ, opBQB, opBR, opBT, opBU,
+			opDV, opDVD, opDVI,
+			opET,
+			opGA, opGAB, opGDV, opGDVI, opGMAN, opGML, opGMLA, opGMLN, opGSB, opGSBB, opGSBD, opGSBI,
+			opHBC,
+			opM2, opM2N, opM2NR, opM2R, opMAN, opMANR, opMAR, opMC, opMCE, opMCF, opMCFU, opML, opMLA, opMLN, opMLR, opMNR,
+			opNULL,
+			opREZ,
+			opSB, opSB2, opSBB, opSBD, opSBI, opSBQ, opSBT, opSBU, opSE, opSUE,
+			opT, opTCB,
+			opVBC, opVEL,
+			opZUS
+		} ;
+
+	RechenwerkBenutzt = tOpcodeSet
+		{
+			opB, opBU, opBR, opBN, opBNR, opBB, opBQ, opBD, opBH, opBQB, opBZ, opBZN, opBT, opBNZ, opBZ2, opB2, opB2V, opB2VN, opB3, opB3V, opBLEI, opBSS, opBL, opBC,
+			opC, opCU, opCR, opCN, opCB, opCMT, opCMR, opCMC, opCQ, opCD, opCH, opCZ, opCT, opCNZ, opC2, opC3,
+			opRT, opTXR, opTRX, opQBR, opQCR, opZK, opTOK,
+			opA, opAB, opAC, opSB, opSBB, opSBC, opSBI, opSBD, opMLR, opMNR, opMAR, opMANR, opDV, opDVI, opDVD, opAQ, opSBQ, opML, opMLN, opMLA, opMAN, opAA, opSBA,
+			opGA, opGAB, opGAC, opGSB, opGSBB, opGSBC, opGSBI, opGSBD, opGML, opGMLN, opGMLA, opGMAN, opGDV, opGDVI, opAU, opSBU, opREZ, opDA, opDSB, opDML, opMLD, opAA, opSBA,
+			opVEL, opAUT, opET, opZUS, opVLA, opATA, opETA, opA2, opSB2, opM2, opM2N, opM2R, opM2NR, opAT, opSBT,
+			opRXMRX, opBA, opBAR, opBAN, opBANR, opLR, opLA, opZTR,
+			opWB, opSFBE, opSSR, opSI0, opSN0, opSGG0, opSG0, opSKG0, opSK0, opSR, opSRN, opSI, opSN, opSGG, opSG, opSKG, opSK,
+			(* opSAA, opSAT, *)
+			opST, opSTN, opSBIT, opSEGG, opPDP,
+			opRLR, opR,
+			opUS, opIR, opSH, opVAQ, opNRM, opKDFR, opKFLD,
+			opTLI, opTLD, opTDM, opTMAX, opTMIN, opTLOG
+
+		} ;
+
+	Adrteil1 = tOpcodeSet
+		{
+			opNULL,	opXBA,	opMNA,	opMA,	opBCL,	opTBC,	opMFUMXB,opMF,
+			opHBA,	opNL,	opVBA,	opMC,	opVBC,	opMCF,	opMCE,	opXCXCN,opXBAN,	opSW,
+			opSXI,	opSXGG,	opSXKG,	opSXN,
+			opZMC,	opLMC,	opLMT,	opLC,	opSM,	opSMN,	opS,	opVSS,	opSU,	opTCB,	opSFB,	opHBC,	opMCFU,	opZU,
+			opAB,	opSBB,	opA,	opAC,	opSBI,	opSBD,	opSB,	opSBC,	opGSBI,	opAU,	opGAC,	opGA,	opGSBD,	opSBU,	opGSBC,	opGSB,
+			opGAB,	opGSBB,	opML,	opMLR,	opMLA,	opMAR,	opMLN,	opMNR,	opMAN,	opMANR,	opGMLN,	opGMAN,	opGML,	opGMLA,
+			opDV,	opDVD,	opDVI,	opVAQ,	opGDV,	opREZ,	opGDVI,	opB2VN,	opVEL,	opAUT,	opET,	opZUS,	opB3,	opB3V,	opB2,	opB2V,
+			opB,	opBD,	opBQ,	opBH,	opBB,	opBN,	opBR,	opBNR,	opM2N,	opM2NR,	opM2,	opM2R,	opA2,	opSB2,	opAQ,	opSBQ,
+			opC,	opCR,	opCMT,	opCMR,	opCN,	opCB,	opCD,	opCQ,	opVLA,	opATA,	opETA,	opLA,	opBA,	opCH,
+			opKDFR,	opKFLD,	opRT,	opAA,	opSBA,	opLR,	opHALT,	opKB,	opNRM,
+			opC2,	opC3,	opCMC,	opBC,	opSI0,	opSKG0,	opSGG0,	opSN0,	opSAT,	opSAA,	opSK,	opSG,	opSI,	opSN,	opSKG,	opSGG,
+			opBL,	opVPU,	opSXR,	opSXRN,	opBCI,	opZI,	opSR,	opPDP,	opSRN,	opSE,	opSUE,	opBLEI,
+			opZT0,	opZT1,	opZT2,	opZT3,	opT,	op_CD,	opSXG,	opSXK,
+			opCU,	opBZN,	opBU,	opSG0,	opSK0,	opBZ2,	opBZ,	opBQB,	opCZ,	opBAR,	opBANR,	opBAN,
+			opIR,	opTDM,	opTLD,	opTLI,	opTLOG,	opTMIN,	opTMAX,
+			opDA,	opDSB,	opDML,	opMLD,	opAT,	opSBT,	opBT,	opCT,	opWB,	opSFBE,	opBSS,	opZK,	opTOK,	opQBR,	opQCR
+
+		} ;
+
+	Adrteil2 = tOpcodeSet
+		{
+			opEMU,	opMU,	opMD,	opSZX,	opTXX,	opTTX,	opMHX,	opHBPX,
+			opLZL,	opZX,	opSLN,	opSNL,	opSL,	opSLL,
+			opMAB,	opSHB,	opWTV,	opWTR,	opEMB,	opE,	opENZ,	opEZ,	opHXP,	opMH,	opHXX,	opVXX,
+			opMABI,
+			opTXR,	opRXMRX,
+			opST,	opSTN,	opSEGG,	opR,	opSH,	opTRX,
+			opSSR,
+			opRLR,	opUS,	opBNZ,	opCNZ,
+			opSBIT
+		} ;
+
+%IF %NOT WEB %THEN
+
+	spezIR =	'        AQDHB   ' ;
+	spezLA =	'        F2E3HTVM' ;
+	spezLR =	'        2*AQDH  ' ;	(* * für Typenkennung *)
+	spezRXMRX =	'AQDHBN C        ' ;
+	spezSL =	'        12345678' ;
+	spezLZL =	'12345678        ' ;
+	spezRRLR =	'        AQDH   l' ;	(* l für 0 bei L sonst 1 *)
+	spezRRLRbit21 =	'        FUBY.  .' ;
+	spezRT =	'        AQDH    ' ;
+	spezSH =	'AQLKZRUB        ' ;
+	spezSHB =	'L               ' ;
+	spezSTSTN =	'        2*AQDH  ' ;
+	spezTXRTRX =	'AQDHN           ' ;
+	spezUS =	'68CG            ' ;
+	spezZK =	'BIVR            ' ;
+	spezZK2 =	'          DHB   ' ;
+	spezZTR =	'        2*AQDHM ' ;
+
+
+
+PROCEDURE GetMnemo (befehl : CARDINAL; VAR mnemo : ARRAY OF CHAR) ;
+
+PROCEDURE BefehlGueltig (mnemo : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetBefehl (mnemo : ARRAY OF CHAR) : (* 24-Bit-Befehl : *)  CARDINAL ;
+
+PROCEDURE Get_R_RLR (adressteil : CARDINAL8 ; VAR ext : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE GetZusatzbits (spez, maske : ARRAY OF CHAR) : CARDINAL16 ;
+
+PROCEDURE GetZusatzbitsTest (spez, maske : ARRAY OF CHAR) : CARDINAL16 ;
+
+%END
+
+
+
+PROCEDURE protZeile (str : ARRAY OF CHAR) ;
+
+PROCEDURE protZeile2 (str1, str2 : ARRAY OF CHAR) ;
+
+PROCEDURE ShowMemory ;
+
+PROCEDURE BefehleZeigen (adr : ARRAY OF CHAR) ;
+
+PROCEDURE Zeigen (adr : ARRAY OF CHAR) ;
+
+PROCEDURE TraceBefehl (txt : ARRAY OF CHAR) ;
+
+
+PROCEDURE PutIntoClipboard (txt : ARRAY OF CHAR) ;
+
+PROCEDURE TRIM (VAR str : ARRAY OF CHAR) ;
+
+PROCEDURE EqualI (str1, str2 : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE CardToHex1 (wert : CARDINAL ; VAR str : ARRAY OF CHAR) ;
+
+PROCEDURE CardToHex2 (wert : CARDINAL ; VAR str : ARRAY OF CHAR) ;
+
+PROCEDURE CardToHex4 (wert : CARDINAL ; VAR str : ARRAY OF CHAR) ;
+
+PROCEDURE CardToHex6 (wert : CARDINAL ; VAR str : ARRAY OF CHAR) ;
+
+PROCEDURE CardToHex8 (wert : CARDINAL ; VAR str : ARRAY OF CHAR) ;
+
+PROCEDURE CardToHex12 (wert : CARDINAL64 ; VAR str : ARRAY OF CHAR) ;
+
+
+END AsmDisasm.

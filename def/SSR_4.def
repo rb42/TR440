@@ -1,0 +1,29 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SSR_4;
+
+(*	19.12.15	*)
+
+PROCEDURE _SSR_4_0 ;
+
+PROCEDURE _SSR_4_4 ;
+
+PROCEDURE _SSR_4_8 ;
+
+PROCEDURE _SSR_4_20 ;
+
+PROCEDURE _SSR_4_24 ;
+
+PROCEDURE _SSR_4_28 ;
+
+PROCEDURE _SSR_4_32 ;
+
+PROCEDURE _SSR_4_36 ;
+
+END SSR_4.

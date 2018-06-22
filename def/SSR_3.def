@@ -1,0 +1,37 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SSR_3;
+
+(*	19.12.15	*)
+
+
+PROCEDURE _SSR_3_0 ;
+
+PROCEDURE _SSR_3_4 ;
+
+PROCEDURE _SSR_3_8 ;
+
+PROCEDURE _SSR_3_12 ;
+
+PROCEDURE _SSR_3_16 ;
+
+PROCEDURE _SSR_3_20 ;
+
+PROCEDURE _SSR_3_24 ;
+
+PROCEDURE _SSR_3_28 ;
+
+PROCEDURE _SSR_3_36 ;
+
+PROCEDURE _SSR_3_56 ;
+
+PROCEDURE _SSR_3_68 ;
+
+
+END SSR_3.

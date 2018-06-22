@@ -1,0 +1,47 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SSR_250;
+
+(*	28.01.16	*)
+
+
+PROCEDURE _SSR_250_2 ;
+
+PROCEDURE _SSR_250_4 ;
+
+PROCEDURE _SSR_250_6 ;
+
+PROCEDURE _SSR_250_8 ;
+
+PROCEDURE _SSR_250_10 ;
+
+PROCEDURE _SSR_250_12 ;
+
+PROCEDURE _SSR_250_20 ;
+
+PROCEDURE _SSR_250_22 ;
+
+PROCEDURE _SSR_250_24 ;
+
+PROCEDURE _SSR_250_30 ;
+
+PROCEDURE _SSR_250_32 ;
+
+PROCEDURE _SSR_250_34 ;
+
+PROCEDURE _SSR_250_40 ;
+
+PROCEDURE _SSR_250_42 ;
+
+PROCEDURE _SSR_250_44 ;
+
+PROCEDURE _SSR_250_46 ;
+
+
+END SSR_250.

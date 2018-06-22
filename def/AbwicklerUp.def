@@ -1,0 +1,107 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE AbwicklerUp;
+
+(*	09.06.18	*)
+
+FROM Struktur IMPORT
+	SpeicherAdresse, Ganzwort ;
+
+
+TYPE
+	WahlschalterNummer =
+			(ZustWahl16, ZustWahl15, ZustWahl14, ZustWahl13, ZustWahl12, ZustWahl11, ZustWahl10,
+			ZustWahl9, ZustWahl8, ZustWahl7, ZustWahl6, ZustWahl5, ZustWahl4, ZustWahl3, ZustWahl2, ZustWahl1) ;
+
+	tSatz =		POINTER TO
+				RECORD
+					CASE : BOOLEAN OF
+					TRUE :
+						bytes :	ARRAY [0..458751] OF CHAR ;
+					ELSE
+						GWe :	ARRAY [0..65535] OF Ganzwort ;
+					END ;
+				END ;
+
+CONST
+	WahlschalterVeraenderbar =					(* für SSR 1 8   /   SSR 1 12	*)
+					(* F1..F8 : *)	0FF0000H BOR
+					(* Z1..Z16 : *)	0007EB8H ;	(* Z1 = GSP, Z8 = Maintenance, Z9 = frei, Z10 = Rerun *)
+
+
+VAR
+	VBL :		SpeicherAdresse ;
+
+	FS :		CARDINAL ;		(* = 0 wenn kein Fehler *)
+
+	SSRl,
+	SSRr :		CARDINAL8 ;
+
+	AufrufAdresse:	CARDINAL ;
+
+	Wahlschalter :	CARDINAL = 0C030H ;	(* Z1=GSP, Z2=DPROTOKOLL, Z11=ProgrammierModus, Z12=dto. *)
+
+	AktDateiname :	ARRAY [0..255] OF CHAR ;
+
+
+	AktSatz :	tSatz = NIL ;
+
+	XABgefunden :	BOOLEAN = FALSE ;
+
+
+PROCEDURE upDateiAnf (VAR DBN, Dateiname, BKZ, EXDKZ : ARRAY OF CHAR ; VAR GENVNR : CARDINAL ; VAR lfd : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE upGet_AADTB_LNGDTB (VAR Dateiname : ARRAY OF CHAR ; VBLrelativ : CARDINAL ; VAR GENVNR : CARDINAL) : BOOLEAN ;
+
+PROCEDURE upDateiName (VAR DBN, Dateiname : ARRAY OF CHAR ; VAR GENVNR : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE GNRausGBK (reladr : CARDINAL) : CARDINAL ;
+
+
+PROCEDURE upStrmnr (VAR strmnr : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE upStart (VAR ON, OLN : ARRAY OF CHAR)  ;
+
+
+PROCEDURE DateiDrucken (typ : CHAR) ;
+
+
+PROCEDURE AusgabeListe (Konsole, Ablauf : BOOLEAN) : BOOLEAN ;
+
+
+PROCEDURE SSRmeldung (bez, str : ARRAY OF CHAR) ;
+
+PROCEDURE SSRunzulaessig ;
+
+PROCEDURE ZustandsWahlschalter (nr : WahlschalterNummer) : BOOLEAN ;
+
+PROCEDURE SetZustandsWahlschalter (nr : WahlschalterNummer ; setzen : BOOLEAN) ;
+
+
+PROCEDURE SSRaufruf (txt : ARRAY OF CHAR ; VBLworte : CARDINAL) : BOOLEAN ;
+
+PROCEDURE SSRpuffer (name : ARRAY OF CHAR; reladr : CARDINAL) ;
+
+PROCEDURE SSRfehler (fs : CARDINAL ; txt : ARRAY OF CHAR) ;
+
+
+PROCEDURE checkOEFDB (DBN : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE fehlerOEFDB ;
+
+PROCEDURE unzulaessigeAnwendung (grund : ARRAY OF CHAR) ;
+
+PROCEDURE formaleFehler ;
+
+PROCEDURE SSRnimpl (txt : ARRAY OF CHAR) ;
+
+
+END AbwicklerUp.

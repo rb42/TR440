@@ -1,0 +1,41 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE upVLI;
+
+(* 09.12.15 *)
+
+IMPORT VLIkern ;
+
+FROM Register IMPORT
+	reg48 ;
+
+VAR
+	VLIa,
+	VLIb,
+	VLIc,
+	VLId,
+	VLIhilf1,
+	VLIhilf2,
+	VLIhilf3 :		VLIkern.VLI ;
+
+
+PROCEDURE InitVLI ;
+
+PROCEDURE wert48ToVLI (wert : CARDINAL64 ; VAR INOUT vli : VLIkern.VLI) ;
+
+PROCEDURE EinfachToVLI (reg : reg48 ; VAR INOUT vli : VLIkern.VLI) ;
+
+PROCEDURE VLItoEinfach (vli : VLIkern.VLI ; VAR reg : reg48) : BOOLEAN ;
+
+PROCEDURE DoppeltToVLI (regHi, regLo : reg48 ; VAR INOUT vli : VLIkern.VLI) ;
+
+PROCEDURE VLItoDoppelt (vli : VLIkern.VLI ; VAR regHi, regLo : reg48) : BOOLEAN ;
+
+
+END upVLI.

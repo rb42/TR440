@@ -1,0 +1,130 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE TransportBefehle;
+
+(*	20.11.15	*)
+
+PROCEDURE _B ;
+
+PROCEDURE _BU ;
+
+PROCEDURE _BR ;
+
+PROCEDURE _BN ;
+
+PROCEDURE _BNR ;
+
+PROCEDURE _BB ;
+
+PROCEDURE _BQ ;
+
+PROCEDURE _BD ;
+
+PROCEDURE _BH ;
+
+PROCEDURE _BQB ;
+
+PROCEDURE _BZ ;
+
+PROCEDURE _BZN ;
+
+PROCEDURE _BT ;
+
+PROCEDURE _BNZ ;
+
+PROCEDURE _BZ2 ;
+
+PROCEDURE _B2 ;
+
+PROCEDURE _B2V ;
+
+PROCEDURE _B2VN ;
+
+PROCEDURE _B3 ;
+
+PROCEDURE _B3V ;
+
+PROCEDURE _BLEI ;
+
+PROCEDURE _BSS ;
+
+PROCEDURE _BL ;
+
+PROCEDURE _BC ;
+
+PROCEDURE _BCI ;
+
+PROCEDURE _C ;
+
+PROCEDURE _CU ;
+
+PROCEDURE _CR ;
+
+PROCEDURE _CN ;
+
+PROCEDURE _CB ;
+
+PROCEDURE _CMT ;
+
+PROCEDURE _CMR ;
+
+PROCEDURE _CMC ;
+
+PROCEDURE _CQ ;
+
+PROCEDURE _CD ;
+
+PROCEDURE _CH ;
+
+PROCEDURE _CZ ;
+
+PROCEDURE _CT ;
+
+PROCEDURE _CNZ ;
+
+PROCEDURE _C2 ;
+
+PROCEDURE _C3 ;
+
+PROCEDURE _RT ;
+
+PROCEDURE _XB ;
+
+PROCEDURE _XC ;
+
+PROCEDURE _XCN ;
+
+PROCEDURE _TTX ;
+
+PROCEDURE _TXX ;
+
+PROCEDURE _TXR ;
+
+PROCEDURE _TRX ;
+
+PROCEDURE _TCB ;
+
+PROCEDURE _TBC ;
+
+PROCEDURE _BCL ;
+
+PROCEDURE _WTV ;
+
+PROCEDURE _WTR ;
+
+PROCEDURE _QBR ;
+
+PROCEDURE _QCR ;
+
+PROCEDURE _ZK ;
+
+PROCEDURE _TOK ;
+
+
+END TransportBefehle.

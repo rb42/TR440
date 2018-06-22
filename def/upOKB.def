@@ -1,0 +1,29 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE upOKB;
+
+(*	30.08.16	*)
+
+
+FROM Programm IMPORT
+	pProgramm ;
+
+VAR
+	OKBaktiv :	BOOLEAN = FALSE ;
+	MV_NR :		ARRAY [0..7] OF CHAR ;
+
+
+PROCEDURE upGebietslageInDateilage ;
+
+PROCEDURE ProgrammOKBsuchen (name : ARRAY OF CHAR) : pProgramm ;
+
+PROCEDURE GebieteLadenOKB () : BOOLEAN ;
+
+
+END upOKB.

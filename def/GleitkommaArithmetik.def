@@ -1,0 +1,56 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE GleitkommaArithmetik;
+
+(*	20.11.15	*)
+
+PROCEDURE _GA ;
+
+PROCEDURE _GAB ;
+
+PROCEDURE _GAC ;
+
+PROCEDURE _GSB ;
+
+PROCEDURE _GSBB ;
+
+PROCEDURE _GSBC ;
+
+PROCEDURE _GSBI ;
+
+PROCEDURE _GSBD ;
+
+PROCEDURE _GML ;
+
+PROCEDURE _GMLN ;
+
+PROCEDURE _GMLA ;
+
+PROCEDURE _GMAN ;
+
+PROCEDURE _GDV ;
+
+PROCEDURE _GDVI ;
+
+PROCEDURE _AU ;
+
+PROCEDURE _SBU ;
+
+PROCEDURE _REZ ;
+
+PROCEDURE _DA ;
+
+PROCEDURE _DSB ;
+
+PROCEDURE _DML ;
+
+PROCEDURE _MLD ;
+
+
+END GleitkommaArithmetik.

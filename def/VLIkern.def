@@ -1,0 +1,111 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE VLIkern;
+
+
+(* 09.12.15 *)
+
+
+FROM SYSTEM IMPORT
+    BYTE ;
+
+FROM ExStorage IMPORT
+	HeapInfoPointer ;
+
+%IF DLL %THEN
+<*/EXPORTALL/PROPAGATEEXCEPTIONALL/COPYATTRIBUTES*>
+%END
+
+TYPE
+    Digit       = CARDINAL32;
+    DigitS      = INTEGER32;(*same size as digit but signed*)
+
+
+CONST
+    DigitBits           = SIZE(Digit) * 8;
+
+    AllocIncrement      = 1024 / DigitBits;
+
+TYPE
+    Digit2              = CARDINAL64;
+
+
+TYPE
+    VLIrec =
+        RECORD
+        used            : CARDINAL;
+        size            : CARDINAL;
+        neg             : BOOLEAN;
+        heap            : HeapInfoPointer;
+        digits          : ARRAY [0..15] OF Digit;
+        END;
+    VLI         = POINTER TO VLIrec;
+
+    DigitsPointer       = POINTER TO ARRAY [0..15] OF Digit;
+
+PROCEDURE Create() : VLI;
+
+PROCEDURE IsNegative(vli : VLI) : BOOLEAN;
+(* returns TRUE when vli < 0 *)
+
+PROCEDURE SetValue(vli : VLI; value : INTEGER64);
+(* a simple way to load a "small" integer value *)
+
+PROCEDURE GetValue (vli : VLI ; VAR value : INTEGER64) : BOOLEAN ;
+(* wenn möglich bitte INTEGER64 ausliefern *)
+
+PROCEDURE Add(vliA, vliB : VLI; VAR INOUT result : VLI);
+(* adds A + B.
+   result cannot be the same parameter as vliA or vliB.
+*)
+
+PROCEDURE Subtract(vliA, vliB : VLI; VAR INOUT result : VLI);
+(* subtracts A - B.
+   result cannot be the same parameter as vliA or vliB.
+*)
+
+PROCEDURE Multiply(vliA, vliB : VLI; VAR INOUT result : VLI);
+(* multiplies A * B.
+   result cannot be the same parameter as vliA or vliB.
+*)
+
+PROCEDURE Divide(vliA, vliB : VLI;
+                 VAR INOUT result : VLI;
+                 VAR INOUT remainder : VLI);
+(* divides A / B.
+   result, remainder cannot be the same parameter as vliA or vliB.
+
+   the division of this module is consistent with the Modula-2 / and REM operators.
+   these operators are consistent with the division instructions implemented is
+   CPUs.
+   this means integer division is performed with round towards zero.
+   a negative divisor is allowed.
+
+   some algorithms refer to the "modulus".
+       (some public/private key encryption algorithms)
+   for positive numbers the division of this module is compatible with this form
+   of integer division.
+   integer division with modulus does not allow a negative divisor.
+   integer division with modulus rounds to a smaller number.
+   the Modula-2 DIV and MOD operators are integer division with modulus.
+*)
+
+PROCEDURE GetDigits(vli : VLI;
+                    VAR OUT digits : ARRAY OF Digit;
+                    VAR INOUT amount : CARDINAL;
+                    VAR OUT negative : BOOLEAN) : BOOLEAN;
+(* digits[0] is the least significant digit.
+
+   on entry amount = the size in Digits of the 'digits' buffer.
+   on return amount = the number of Digits placed into the buffer.
+
+   return TRUE if successful
+   returns FALSE if the digits buffer is not large enough.
+*)
+END VLIkern.

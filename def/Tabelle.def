@@ -1,0 +1,27 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Tabelle;
+
+(*	20.11.15	*)
+
+PROCEDURE _TLI ;
+
+PROCEDURE _TLD ;
+
+PROCEDURE _TDM ;
+
+PROCEDURE _TMAX ;
+
+PROCEDURE _TMIN ;
+
+PROCEDURE _TLOG ;
+
+
+
+END Tabelle.

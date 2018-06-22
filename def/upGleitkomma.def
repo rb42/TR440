@@ -1,0 +1,25 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE upGleitkomma;
+
+(*	09.01.16	*)
+
+FROM Register IMPORT
+	tVgl ;
+
+PROCEDURE gkTR440toIntel (gw1, gw2 : CARDINAL64 ; VAR lr : LONGREAL) : BOOLEAN ;
+
+PROCEDURE gkIntelToTR440 (lr : LONGREAL ; VAR gw1, gw2 : CARDINAL64) : BOOLEAN ;
+
+PROCEDURE gkIntelToTR440runden (lr : LONGREAL ; VAR gw1 : CARDINAL64) : BOOLEAN ;
+
+PROCEDURE gkVgl (a, b : CARDINAL64) : tVgl ;
+
+
+END upGleitkomma.

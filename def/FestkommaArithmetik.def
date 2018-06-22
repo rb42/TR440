@@ -1,0 +1,60 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE FestkommaArithmetik;
+
+(*	20.11.15	*)
+
+PROCEDURE _A ;
+
+PROCEDURE _AB ;
+
+PROCEDURE _AC ;
+
+PROCEDURE _SB ;
+
+PROCEDURE _SBB ;
+
+PROCEDURE _SBC ;
+
+PROCEDURE _SBI ;
+
+PROCEDURE _SBD ;
+
+PROCEDURE _MLR ;
+
+PROCEDURE _MNR ;
+
+PROCEDURE _MAR ;
+
+PROCEDURE _MANR ;
+
+PROCEDURE _DV ;
+
+PROCEDURE _DVI ;
+
+PROCEDURE _DVD ;
+
+PROCEDURE _AQ ;
+
+PROCEDURE _SBQ ;
+
+PROCEDURE _ML ;
+
+PROCEDURE _MLN ;
+
+PROCEDURE _MLA ;
+
+PROCEDURE _MAN ;
+
+PROCEDURE _AA ;
+
+PROCEDURE _SBA ;
+
+
+END FestkommaArithmetik.

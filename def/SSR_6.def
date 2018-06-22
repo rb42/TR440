@@ -1,0 +1,30 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE SSR_6;
+
+(*	26.11.16	*)
+
+VAR
+	DatNam :	ARRAY [0..255] OF CHAR = '' ;
+
+
+PROCEDURE _SSR_6_0 ;
+
+PROCEDURE _SSR_6_4 ;
+
+PROCEDURE _SSR_6_8 ;
+
+PROCEDURE _SSR_6_12 ;
+
+PROCEDURE _SSR_6_16 ;
+
+PROCEDURE _SSR_6_20 ;
+
+
+END SSR_6.

@@ -1,0 +1,32 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE OFNup;
+
+(*	22.02.16	*)
+
+
+VAR
+	AktString :	ARRAY [0..267] OF CHAR ;
+
+PROCEDURE OFNsuche (initdir : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE OFNtas (vbname : ARRAY OF CHAR ; speichern : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE OFNlst (vbname : ARRAY OF CHAR ; speichern : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE OFNtrac (vbname : ARRAY OF CHAR ; speichern : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE OFNkdo (vbname : ARRAY OF CHAR ; speichern : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE OFNtr440 (vbname : ARRAY OF CHAR ; speichern : BOOLEAN) : BOOLEAN ;
+
+PROCEDURE OFNexe (titel, vbname : ARRAY OF CHAR ; speichern : BOOLEAN) : BOOLEAN ;
+
+
+END OFNup.

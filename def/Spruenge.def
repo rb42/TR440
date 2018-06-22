@@ -1,0 +1,103 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Spruenge;
+
+(*	20.11.15	*)
+
+PROCEDURE _NULL ;
+
+PROCEDURE _WB ;
+
+PROCEDURE _S ;
+
+PROCEDURE _SE ;
+
+PROCEDURE _SFB ;
+
+PROCEDURE _SFBE ;
+
+PROCEDURE _SU ;
+
+PROCEDURE _SUE ;
+
+PROCEDURE _SI0 ;
+
+PROCEDURE _SN0 ;
+
+PROCEDURE _SGG0 ;
+
+PROCEDURE _SG0 ;
+
+PROCEDURE _SKG0 ;
+
+PROCEDURE _SK0 ;
+
+PROCEDURE _SR ;
+
+PROCEDURE _SRN ;
+
+PROCEDURE _SI ;
+
+PROCEDURE _SN ;
+
+PROCEDURE _SGG ;
+
+PROCEDURE _SG ;
+
+PROCEDURE _SKG ;
+
+PROCEDURE _SK ;
+
+PROCEDURE _SXI ;
+
+PROCEDURE _SXN ;
+
+PROCEDURE _SXGG ;
+
+PROCEDURE _SXG ;
+
+PROCEDURE _SXKG ;
+
+PROCEDURE _SXK ;
+
+PROCEDURE _SXR ;
+
+PROCEDURE _SXRN ;
+
+PROCEDURE _SZX ;
+
+PROCEDURE _SM ;
+
+PROCEDURE _SMN ;
+
+PROCEDURE _SAA ;
+
+PROCEDURE _SAT ;
+
+PROCEDURE _ST ;
+
+PROCEDURE _STN ;
+
+PROCEDURE _SBIT ;
+
+PROCEDURE _SEGG ;
+
+PROCEDURE _SL ;
+
+PROCEDURE _SLL ;
+
+PROCEDURE _SLN ;
+
+PROCEDURE _SNL ;
+
+PROCEDURE _PDP ;
+
+
+
+END Spruenge.

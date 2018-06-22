@@ -1,0 +1,8 @@
+DEFINITION MODULE ;
+
+CONST
+    Icon16                      = 100;
+    Icon32                      = 200;
+    Icon48                      = 300;
+
+END .

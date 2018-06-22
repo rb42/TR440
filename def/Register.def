@@ -1,0 +1,86 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Register;
+
+(*	04.05.16	*)
+
+
+TYPE
+	reg48 =		RECORD
+				CASE : BOOLEAN OF
+				TRUE :	inh :	CARDINAL64 ;
+				ELSE	lo,
+					hi :	CARDINAL ;
+				END ;
+				TK :	CARDINAL8 ;
+			END ;
+
+	tRegBlock =	RECORD
+				A, Q, D, H :	reg48 ;
+				B, F, X, T :	CARDINAL ;
+				Y, K, U :	CARDINAL8 ;
+				M :		BOOLEAN ;
+			END ;
+
+
+
+	tVgl =		(kleiner, gleich, groesser) ;
+
+
+VAR
+		(* Rechenwerk : *)
+	RegA,					(* Akkumulator			*)
+	RegQ,					(* Quotientenregister		*)
+	RegD,					(* Multiplikandenregister	*)
+	RegH :		reg48 ;			(* Hilfsregister		*)
+
+	RegY :		CARDINAL8 ;		(* Shiftzähler			 8 Bits		*)
+
+	RegM :		BOOLEAN ;		(* Markenregister		 1  Bit		*)
+
+
+		(* Befehlswerk : *)
+	RegB,					(* Bereitadressregister		24 Bits		*)
+	RegF,					(* Befehlsfolgeregister		22 Bits		*)
+	RegX :					(* Indexbasisregister		22 Bits		*)
+			CARDINAL ;
+
+	RegK,					(* Merlichterregister		 8 Bits		*)
+	RegU :		CARDINAL8 ;		(* Unterprogrammregister	 8 Bits		*)
+
+	RegT :		CARDINAL ;		(* Prüfregister *)
+
+	mod1,					(* Adress-Modifikator 1. Art			*)
+	mod2 :					(* Adress-Modifikator 2. Art			*)
+			INTEGER ;
+
+	AktBefehlscode :CARDINAL8 ;		(* des aktuell zu bearbeitenden Befehls		*)
+(*
+	AktAdressteil16 :CARDINAL16 ;		(* des aktuell zu bearbeitenden Befehls		*)
+*)
+	AktAdressteil :	CARDINAL ;		(* dto. nach Modifikationen			*)
+
+	AktWertFuerSpeicher : CARDINAL64 ;	(* abzuspeichernde Bits				*)
+
+	HilfsReg :	reg48 ;
+
+	GrossSeitenInvarianz :	BOOLEAN = FALSE ;	(* für Sprünge					*)
+
+	MUmodifizierung :	BOOLEAN = FALSE ;	(* für Rücksprünge über MU			*)
+
+	R_Befehl :		BOOLEAN = FALSE ;	(* R xxx  op   Befehl mit Register-Operand	*)
+
+	FolgeAdresse :		CARDINAL ;
+
+
+PROCEDURE SaveRegister (VAR reg : tRegBlock) ;
+
+PROCEDURE LoadRegister (VAR reg : tRegBlock) ;
+
+END Register.

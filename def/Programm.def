@@ -1,0 +1,112 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Programm;
+
+(*	08.09.16	*)
+
+
+FROM Struktur IMPORT
+	SpeicherAdresse,
+	pLeitblock,
+	MaxGanzwortInSeite,
+	SeitenNummer ;
+
+FROM Register IMPORT
+	tRegBlock ;
+
+FROM Namen IMPORT
+	pName ;
+
+CONST
+	MaxSeitenIndex =	7 * (MaxGanzwortInSeite + 1) - 1 ;
+
+
+TYPE
+	pSeitenkopie =	POINTER TO tSeitenkopie ;
+	tSeitenkopie =	RECORD
+				next :		pSeitenkopie ;
+				seitennummer :	SeitenNummer ;
+				lnginhalt :	CARDINAL ;
+				schreibschutz :	BOOLEAN ;
+				inhalt :	ARRAY [0..MaxSeitenIndex] OF CARDINAL8 ;		(* Länge dynamisch *)
+			END ;
+
+
+	pProgramm =	POINTER TO tProgramm ;
+	tProgramm =	RECORD
+				prev,
+				next :		pProgramm ;
+				name,
+				olname :	ARRAY [0..31] OF CHAR ;
+				OLK :		CARDINAL ;
+				start,
+				alarm :		SpeicherAdresse ;
+				seite0 :	pSeitenkopie ;			(* nur für Operatorkörper *)
+				leitblock :	pLeitblock ;			(* nur für Operatorläufe *)
+				register :	tRegBlock ;
+
+				PseudoGeb :	ARRAY [0..255] OF CHAR ;
+				AktQuelle,
+				AktWoerterbuch,
+				quelle0,
+				QuellZeile0,
+				woerterbuch0,
+				AktWB,
+				AktSegmWB,
+				CzoneWB :	pName ;
+				ausOKBgeladen :	BOOLEAN ;
+
+			END ;
+
+
+VAR
+	OLNvergeben :	BOOLEAN ;	(* nach 'ProgrammStarten' *)
+
+
+PROCEDURE ProgrammLauf (Start : CARDINAL) ;
+
+
+PROCEDURE ProgrammMerken (name : ARRAY OF CHAR) : pProgramm ;
+
+PROCEDURE ProgrammSpeichern (name : ARRAY OF CHAR) ;
+
+PROCEDURE ProgrammStarten (name, olname : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE ProgrammPausieren ;
+
+PROCEDURE ProgrammFortsetzen ;
+
+PROCEDURE ProgrammBeenden ;
+
+PROCEDURE ProgrammLoeschen (name : ARRAY OF CHAR) ;
+
+
+PROCEDURE ProgNameExt (dbname, name : ARRAY OF CHAR ; VAR ziel : ARRAY OF CHAR) ;
+
+
+PROCEDURE NewProgramm (name, olname : ARRAY OF CHAR) : pProgramm ;
+
+
+PROCEDURE InitDauer ;
+
+PROCEDURE ProtDauer ;
+
+PROCEDURE ProtTakte ;
+
+
+PROCEDURE InitRegZeigen ;
+
+PROCEDURE RegAlleZeigen ;
+
+PROCEDURE SprungZeigen ;
+
+PROCEDURE ProgrammZeile (befehl : CARDINAL) ;
+
+
+END Programm.

@@ -1,0 +1,61 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Trace;
+
+(*	18.03.16	*)
+
+FROM SYSTEM IMPORT
+	ADDRESS ;
+
+%IF DLL %THEN
+<*/EXPORTALL/PROPAGATEEXCEPTIONALL/COPYATTRIBUTES*>
+%END
+
+
+(* ist automatisch MultiThread - fähig *)
+
+
+VAR
+	TraceAktiv :	BOOLEAN = FALSE ;
+
+	TraceErlaubt :	BOOLEAN = FALSE ;	(* wird auch im InitTrace auf TRUE gesetzt	*)
+
+	TraceInDatei :	BOOLEAN = FALSE ;	(* muss vor InitTrace besetzt werden		*)
+
+	TraceFuerDebug:	BOOLEAN = FALSE ;	(* dto. für DBGVIEW.EXE				*)
+
+	SEBtrace :	CARDINAL ;		(* Trace-Stufe wird ausserhalb abgefragt	*)
+
+	hWnd :		CARDINAL = 0 ;		(* Vater-Window					*)
+
+	TraceDatei :	ARRAY [0..255] OF CHAR = '' ;
+
+
+(* Aktivierung durch :	1. HKEY_LOCAL_MACHINE\SOFTWARE[\Wow6432node]\SEB\SEBtrace\SEBtrace=nnn
+			2. HKEY_CURRENT_USER\SOFTWARE\SEB\SEBtrace\SEBtrace=nnn
+			3. Environment-Symbol  SEBtrace=nnn
+			4. Trace.SEBtrace := nnn ; InitTrace ;
+
+   Bedeutung von nnn :	bitweise, aktiv durch nnn > 0
+			256	jedesmal mit Dialog anhalten
+			512	Ausgabe --> Datei  (default  C:\log\SEBtrace.log  )
+			1024	Ausgabe --> System-Debugausgabe (DBGVIEW)
+*)
+
+
+PROCEDURE InitTrace ;		(* auch für nachträgliche Neu-Initialisierung *)
+
+PROCEDURE ExitTrace ;
+
+
+PROCEDURE TraceF (formatStr : ARRAY OF CHAR	(* %s für String %c für CARDINAL %h für Hex-CARDINAL %i für INTEGER %l für LONGINT \t für TAB *)
+                       			)	(* beliebige Anzahl Parameter dahinter *)
+					 [RightToLeft, LEAVES, VARIABLE] ;
+
+END Trace.

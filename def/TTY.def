@@ -1,0 +1,31 @@
+DEFINITION MODULE TTY;
+
+
+(*	06.12.16	*)
+
+
+VAR
+	EingabePuffer :	ARRAY [0..255] OF CHAR ;
+
+
+PROCEDURE InitTTY (port : CARDINAL) : BOOLEAN ;
+
+PROCEDURE CheckTTY ;
+
+PROCEDURE EingabeLesen (VAR Zeile : ARRAY OF CHAR) ;
+
+
+PROCEDURE ClearInput ;
+
+
+(**************************************** ab hier Versionen für generelle V24-Terminals : ***************************************************)
+
+
+PROCEDURE InitCOM (port : CARDINAL) : BOOLEAN ;
+
+PROCEDURE CheckCOM ;
+
+PROCEDURE COMeingabeLesen (VAR Zeile : ARRAY OF CHAR) ;
+
+
+END TTY.

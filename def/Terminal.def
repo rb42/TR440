@@ -1,0 +1,165 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+
+DEFINITION MODULE Terminal;
+
+%IF DLL %THEN
+<*/EXPORTALL/PROPAGATEEXCEPTIONALL/COPYATTRIBUTES*>
+%END
+
+FROM WIN32 IMPORT
+	LPTSTR, HWND ;
+
+FROM WINUSER IMPORT
+	IDI_APPLICATION ;
+
+CONST
+
+    CursorUp    = CHR(1);
+    CursorDown  = CHR(2);
+    PageUp      = CHR(3);
+    PageDown    = CHR(4);
+    CursorLeft  = CHR(5);
+    CursorRight = CHR(6);
+    Delete	= CHR(7);
+
+    Pos1	= CHR(14);
+    Ende	= CHR(15) ;
+
+    Escape      = CHR(27);
+    Tab         = CHR(9);
+    BackSpace   = CHR(8);
+    Bell        = CHR(7);
+    Enter       = CHR(13);
+    LineFeed    = CHR(10);
+
+
+TYPE
+	ProtProc =		PROCEDURE (ARRAY OF CHAR) ;
+
+	MenueProc =		PROCEDURE (HWND, CARDINAL) ;
+
+	ReadExtProc =		PROCEDURE (VAR CHAR) (* EingabeEnde *) : BOOLEAN ;
+
+	WriteExtProc =		PROCEDURE (CHAR) ;
+
+
+
+VAR
+	Abbrechbar :		BOOLEAN = TRUE ;
+
+	AbbruchWunsch :		BOOLEAN = FALSE ;
+
+	EingabeVorhanden :	BOOLEAN = FALSE ;
+
+	imWarteZustand :	BOOLEAN = FALSE ;
+
+	Maximal :		BOOLEAN = FALSE ;
+
+	Unterdruecken :		BOOLEAN = FALSE ;
+
+	WindowClass :		ARRAY OF CHAR =	{'sebag Terminal Window'} ;
+
+	WindowTitle :		ARRAY OF CHAR = {'sebag Meldungen', 0C, '                                                  '} ;
+
+	WindowIcon :		LPTSTR = IDI_APPLICATION ;
+
+	WND :			CARDINAL ;
+
+	ZeichenHoehe :		CARDINAL = 0 ;				(* Vorgabe -Wunsch *)
+	FontName :		ARRAY [0..31] OF CHAR = '' ;		(* dto. *)
+
+	MaxSpalte :		CARDINAL = 79 ;
+	MaxZeile :		CARDINAL = 24 ;
+
+	CtrlBreak :		BOOLEAN = FALSE ;
+
+	ProtokollAngemeldet :	BOOLEAN = FALSE ;
+	Protokoll :		ProtProc ;
+
+
+	MenueAngemeldet :	BOOLEAN = FALSE ;
+	MenueAufruf :		MenueProc ;
+
+	ReadExtAngemeldet :	BOOLEAN = FALSE ;
+	ReadExt :		ReadExtProc ;
+
+	WriteExtAngemeldet :	BOOLEAN = FALSE ;
+	WriteExt :		WriteExtProc ;
+
+	msPause :		CARDINAL = 0 ;				(* ms Pause zwischen 2 Zeichen *)
+
+
+PROCEDURE Write(ch : CHAR);
+(* write a single character to the currsor cursor position *)
+
+PROCEDURE WriteString(str : ARRAY OF CHAR);
+(* write a string to the currsor cursor position *)
+
+PROCEDURE WriteCard (n : CARDINAL) ;
+(* write a cardinal to the currsor cursor position *)
+
+PROCEDURE WriteLongCard (n : LONGCARD) ;	(* RB *)
+
+PROCEDURE WriteLn;
+(* set the cursor X position to 0, far left *)
+(* and increment the Y positon, down *)
+(* if the Y position is greater that the terminal window size *)
+(* then the terminal window data is scrolled and a blank line *)
+(* is displayed at the bottom of the terminal window *)
+(* and the Y position of the cursor is at the bottom of the terminal *)
+(* window *)
+
+PROCEDURE Position(X, Y : CARDINAL);
+(* set the cursor position *)
+
+PROCEDURE GetPosition(VAR getX, getY : CARDINAL);
+(* get the cursor position *)
+
+PROCEDURE ClearScreen ;
+(* clears the screen from cursor to end *)
+
+PROCEDURE CharAvail() : BOOLEAN;
+(* is there a character keystroke available  for input *)
+
+PROCEDURE ClearInput ;
+(* allen anstehenden Input wegschmeissen *)
+
+PROCEDURE Read(VAR OUT ch : CHAR);
+(* read a character keystroke *)
+
+PROCEDURE ReadChar() : CHAR;
+(* same as Read, but in function form *)
+
+PROCEDURE ReadString (VAR str : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE Reset;
+(* clears the screen and places the cursor at 0,0 *)
+
+PROCEDURE UpdateWindowTitle ;
+
+PROCEDURE InitWindowIcons (small, big : ARRAY OF CHAR) ;
+
+PROCEDURE SimulateInput (str : ARRAY OF CHAR) ;
+
+PROCEDURE InitInputBuffer ;
+
+PROCEDURE GetMainWindow () : HWND ;
+
+PROCEDURE CursorZeigen ;
+
+PROCEDURE CursorVerbergen ;
+
+PROCEDURE WriteF (formatStr : ARRAY OF CHAR	(* %s für String %c für CARDINAL %h für Hex-CARDINAL %i für INTEGER %l für LONGINT \t für TAB *)
+
+		) %IF %NOT DLL %THEN [RightToLeft, LEAVES, VARIABLE] %END ;	(* beliebige Anzahl Parameter dahinter *)
+
+
+END Terminal.
+

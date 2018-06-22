@@ -1,0 +1,39 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE AsmTrace;
+
+(*	21.02.16	*)
+
+
+VAR
+	BacktraceAnzahl :	CARDINAL = 1000000 ;
+
+	TraceDirectory :	ARRAY [0..255] OF CHAR ;
+
+
+PROCEDURE InitTrace (datnam : ARRAY OF CHAR) ;
+
+PROCEDURE WriteLn ;
+
+PROCEDURE WriteCard (zahl : CARDINAL) ;
+
+PROCEDURE WriteString (str : ARRAY OF CHAR) ;
+
+PROCEDURE SetPos (spalte : CARDINAL) ;
+
+PROCEDURE WriteF (formatStr : ARRAY OF CHAR	(* %s für String %c für CARDINAL %h für Hex-CARDINAL %i für INTEGER %l für LONGINT \t für TAB *)
+
+		) %IF %NOT DLL %THEN [RightToLeft, LEAVES, VARIABLE] %END ;	(* beliebige Anzahl Parameter dahinter *)
+
+PROCEDURE ExitTrace ;
+
+PROCEDURE RestoreTrace (datnam : ARRAY OF CHAR) ;
+
+
+END AsmTrace.

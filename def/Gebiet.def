@@ -1,0 +1,89 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE Gebiet;
+
+(*	31.03.18	*)
+
+FROM Struktur IMPORT * ;
+
+
+TYPE
+	tGebietsName =	ARRAY [0..7] OF CHAR ;
+
+	pRAMelem =	POINTER TO tRAMelem ;
+	tRAMelem =	RECORD
+				prev,
+				next :			pRAMelem ;
+				Seite :			Seite ;
+			END ;
+
+	pGebiet =	POINTER TO tGebiet ;
+	tGebiet =	RECORD
+				prev,
+				next,
+				Master :		pGebiet ;
+				OLK :			CARDINAL ;		(* OLK Eigentümer *)
+				eigenGebietsNummer,
+				GebietsNummer,
+				Laenge :		CARDINAL ;		(* Länge in Seiten *)
+				AnfangsSeite :		CARDINAL ;		(* Anfangsadresse im Hauptspeicher, falls adressiert *)
+				OGNM,
+				PGNM :			tGebietsName ;
+				Dauergebiet,
+				adressiert,
+				Schreibsperre,
+				Stellvertreter :	BOOLEAN ;
+				RAM :			pRAMelem ;		(* erste Seite des Gebietes im Windows-RAM *)
+			END ;
+VAR
+
+	Gebiet0 :	pGebiet = NIL ;
+
+
+PROCEDURE CreateGebiet (OGNM, PGNM : ARRAY OF CHAR ; Laenge : CARDINAL ; Dauergebiet : BOOLEAN ) (* GNR *) : CARDINAL ;
+
+PROCEDURE SuchePGNM (PGNM : ARRAY OF CHAR) (* GNR *) : CARDINAL ;
+
+PROCEDURE SucheOGNM (OGNM : ARRAY OF CHAR) (* GNR *) : CARDINAL ;
+
+PROCEDURE KillAlleOLgebiete (OLK : CARDINAL) ;
+
+PROCEDURE AlleGebieteLoeschen ;
+
+PROCEDURE InitGebiete ;		(* nur Notfall : dabei kann Speicher-Leak entstehen *)
+
+
+PROCEDURE CheckGNR (GNR : CARDINAL) : BOOLEAN ;
+
+PROCEDURE DeleteGebiet (GNR : CARDINAL) : BOOLEAN ;
+
+PROCEDURE AnmeldeGebiet (GNR : CARDINAL ; adresse : SpeicherAdresse ; OGNMneu : ARRAY OF CHAR) : BOOLEAN ;
+
+PROCEDURE AbmeldeGebiet (GNR : CARDINAL) ;
+
+PROCEDURE VeraendereGebiet (GNR, neueLaenge : CARDINAL) : BOOLEAN ;
+
+PROCEDURE SetSchreibSperre (GNR : CARDINAL ; sperre : BOOLEAN) ;
+
+PROCEDURE LiesGebiet (GNR, Achtelseite : CARDINAL ; VAR puffer : tAchtelSeite) : BOOLEAN ;
+
+PROCEDURE SchreibGebiet (GNR, Achtelseite : CARDINAL ; VAR puffer : tAchtelSeite) : BOOLEAN ;
+
+
+PROCEDURE EntladeGebiet (GNR : CARDINAL) ;
+
+PROCEDURE LadeGebiet (GNR : CARDINAL) : BOOLEAN ;
+
+
+PROCEDURE GetGebiet (GNR : CARDINAL) : pGebiet ;
+
+PROCEDURE upShowGebiete ;
+
+
+END Gebiet.

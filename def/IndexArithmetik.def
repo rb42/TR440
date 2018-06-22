@@ -1,0 +1,33 @@
+
+(****************************************************************************************)
+(*											*)
+(*	Copyright © 2018	Rainard Buchmann					*)
+(*				Software Entwicklung Buchmann, Solingen, Germany	*)
+(*											*)
+(****************************************************************************************)
+
+DEFINITION MODULE IndexArithmetik;
+
+(*	26.11.15	*)
+
+PROCEDURE _HBC ;
+
+PROCEDURE _VBC ;
+
+PROCEDURE _HBA ;
+
+PROCEDURE _VBA ;
+
+PROCEDURE _HBPX ;
+
+PROCEDURE _HXP ;
+
+PROCEDURE _HXX ;
+
+PROCEDURE _VXX ;
+
+PROCEDURE _RX ;
+
+
+
+END IndexArithmetik.
