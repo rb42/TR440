@@ -6,7 +6,7 @@ The german website for the emulator with download is www.tr440.info including do
 To create the Windows program TR440.EXE, you can use the ADW-Modula-2-IDE in the 32-bit ASCII version. 
 The IDE is available here for free download : https://www.modula2.org/adwm2/
 
-Start the ASCII\m2e.exe, Select project <<None>> , open the project file TR440.sbp and press'Link'.
+Start the ASCII\m2e.exe, Select project 'None' , open the project file TR440.sbp and press'Link'.
 Everything else runs automatically.
 
 Unfortunately, the size of the generated program differs slightly from the download version on www.tr440.info 
