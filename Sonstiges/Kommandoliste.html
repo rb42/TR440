@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TR440 Kommandoliste</title>
+<link href="TR440.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div class="container">
+  <div class="content">
+    <h1>Liste der im Emulator zur Verfügung stehenden TR440 - Kommandos</h1>
+    <h2>Im Emulator ist zunächst das Basis-Gedächtnis des Entschlüsslers aktiv</h2>
+    <h3>Eine ausführlichere Beschreibung der Kommandos steht im <a href="KdoTaschenbuch.pdf">Kommando-Taschenbuch</a></h3>
+    <p>&nbsp;</p>
+<center>
+    <h3>vom Entschlüssler selbst ausgeführte Kommandos :</h3>
+<div style="width:50%">
+<a href="#ABMELDE">ABMELDE</a>
+<a href="#ABSPANNE">ABSPANNE</a>
+<a href="#DATEI">DATEI</a>
+<a href="#DATENBASIS">DATENBASIS</a>
+<a href="#DEFINIERE">DEFINIERE</a>
+<a href="#DRPROTOKOLL">DRPROTOKOLL</a>
+<a href="#EINSCHLEUSE">EINSCHLEUSE</a>
+<a href="#ESDUMP">ESDUMP</a>
+<a href="#FEHLERHALT">FEHLERHALT</a>
+<a href="#GEDAECHTNIS">GEDAECHTNIS</a>
+<a href="#LFABMELDE">LFABMELDE</a>
+<a href="#LFANMELDE">LFANMELDE</a>
+<a href="#LFDATEI">LFDATEI</a>
+<a href="#LFLOESCHE">LFLOESCHE</a>
+<a href="#LFRESERVIERE">LFRESERVIERE</a>
+<a href="#LOESCHE">LOESCHE</a>
+<a href="#LOESE">LOESE</a>
+<a href="#MELDE">MELDE</a>
+<a href="#NEUSEITE">NEUSEITE</a>
+<a href="#RERUNSTART">RERUNSTART</a>
+<a href="#RESERVIERE">RESERVIERE</a>
+<a href="#RESTART">RESTART</a>
+<a href="#SPERRE">SPERRE</a>
+<a href="#SPRINGE">SPRINGE</a>
+<a href="#STARTE">STARTE</a>
+<a href="#TDEKLARIERE">TDEKLARIERE</a>
+<a href="#VERBINDE">VERBINDE</a>
+<a href="#VEREINBARE">VEREINBARE</a>
+<a href="#WAHLSCHALTER">WAHLSCHALTER</a>
+</div>
+</center>
+</p>
+
+<center>
+    <h3>durch zusätzliche, vorhandene Programme ausgeführte Kommandos :</h3>
+<div style="width:50%">
+<a href="#DRUCKE">DRUCKE</a>	
+<a href="#EINTRAGE">EINTRAGE</a>
+<a href="#INFORMIERE">INFORMIERE</a>
+<a href="#KOMPRIMIERE">KOMPRIMIERE</a>
+<a href="#LFINFORMIERE">LFINFORMIERE</a>
+<a href="#MAUSGABE">MAUSGABE</a>
+<a href="#MEINTRAGE">MEINTRAGE</a>
+<a href="#MLOESCHE">MLOESCHE</a>
+<a href="#MONTIERE">MONTIERE</a>
+<a href="#RECHNE">RECHNE</a>	
+<a href="#SICHERE">SICHERE</a>	
+<a href="#STANZE">STANZE</a>	
+<a href="#TEINTRAGE">TEINTRAGE</a>
+<a href="#TKAPEINFUEGE">TKAPEINFUEGE</a>
+<a href="#TKOPIERE">TKOPIERE</a>
+<a href="#TKORRIGIERE">TKORRIGIERE</a>
+<a href="#TMISCHE">TMISCHE</a>	
+<a href="#TNUMERIERE">TNUMERIERE</a>
+<a href="#TVERTAUSCHE">TVERTAUSCHE</a>
+<a href="#TZKORRIGIERE">TZKORRIGIERE</a>
+<a href="#TZLOESCHE">TZLOESCHE</a>
+<a href="#UEBERSETZE">UEBERSETZE</a>
+<a href="#UMBENENNE">UMBENENNE</a>
+<a href="#VERLAGERE">VERLAGERE</a>
+<a href="#ZEICHNE">ZEICHNE</a>	
+</div></center>
+
+<center>
+    <h3>durch zusätzliche, noch nicht im Emulator vorhandene Programme ausgeführte Kommandos :</h3>
+<div style="width:50%">
+<a href="#BASIC">BASIC</a>	
+<a href="#BIBANMELDE">BIBANMELDE</a>
+<a href="#BIBVERLAGERE">BIBVERLAGERE</a>
+<a href="#BINAERAUS">BINAERAUS</a>
+<a href="#BINAEREIN">BINAEREIN</a>
+<a href="#DIALOGSYSTEM">DIALOGSYSTEM</a>
+<a href="#DUMPE">DUMPE</a>	
+<a href="#KOPIERE">KOPIERE</a>	
+<a href="#MBKOPIERE">MBKOPIERE</a>
+<a href="#MISCHE">MISCHE</a>	
+<a href="#PKORRIGIERE">PKORRIGIERE</a>
+<a href="#PSTANZE">PSTANZE</a>	
+<a href="#SORTIERE">SORTIERE</a>
+<a href="#WANDLE">WANDLE</a>	
+</div></center>
+
+<p>&nbsp;</p>
+<center>
+    <h3>vom Entschlüssler selbst ausgeführte Kommandos :</h3>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+    	<tr>
+    		<th scope="col">Kommandoname</th>
+    		<th scope="col">Spezifikationen</th>
+    		<th scope="col">Zusatzprogramm</th>
+    		</tr>
+    	<tr><td><a name="STARTE">STARTE</a></td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>LAUF</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZEIT</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DUMP</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>UEBWS</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DNUMMER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>AKTIV</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>KONTROLLE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATEN</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PARAMETER</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="DATENBASIS">DATENBASIS</a></td><td>NAME</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="DATEI">DATEI</a></td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TYP</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SATZZAHL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SATZBAU</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TRAEGER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BLOCKUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>VERFALL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZEIT</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>FOLGETRAEGER&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+
+
+    	<tr><td><a name="EINSCHLEUSE">EINSCHLEUSE</a></td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TRAEGER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>FOLGETRAEGER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LOESCHE">LOESCHE</a></td><td>DATENBASIS</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MO</td><td>[ PS&PROMOLOE ]</td></tr>
+	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>[ PS&PROMOLOE ]</td></tr>
+	<tr><td>&nbsp;</td><td>KOMMANDO</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="DEFINIERE">DEFINIERE</a></td><td>TAETIGKEIT</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>OPERATOR</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SPEZIF</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>OBLIGAT</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>EINGANG</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="SPERRE">SPERRE</a></td><td>NAME</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TDEKLARIERE">TDEKLARIERE</a></td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZEILZAHL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LOESE">LOESE</a></td><td>NAME</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="ESDUMP">ESDUMP</a></td><td>BITEIN</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BITAUS</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BEFEHL</td><td></td></tr>
+
+    	<tr><td><a name="NEUSEITE">NEUSEITE</a></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="DRPROTOKOLL">DRPROTOKOLL</a></td><td>ZUSTAND</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>GERAET</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ANZAHL</td><td></td></tr>
+
+    	<tr><td><a name="SPRINGE">SPRINGE</a></td><td>MARKE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BEDINGUNG</td><td>&nbsp;</td></tr>
+
+   	<tr><td><a name="WAHLSCHALTER">WAHLSCHALTER&nbsp;&nbsp;&nbsp;</a></td><td>SETZE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>LOESCHE</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="RESERVIERE">RESERVIERE</a></td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>RESERVE</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LFANMELDE">LFANMELDE</a></td><td>LESEN</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SCHREIBEN</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LFABMELDE">LFABMELDE</a></td><td>DATEI</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LFDATEI">LFDATEI</a></td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TYP</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SATZZAHL</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>SATZBAU</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>ZEIT</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LFLOESCHE">LFLOESCHE</a></td><td>DATEI</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LFRESERVIERE">LFRESERVIERE</a></td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>RESERVE</td><td></td></tr>
+
+    	<tr><td><a name="VERBINDE">VERBINDE</a></td><td>ANSCHLUSSTYP&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMMER</td><td></td></tr>
+
+    	<tr><td><a name="GEDAECHTNIS">GEDAECHTNIS</a></td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>RICHTUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PEGEL</td><td></td></tr>
+
+    	<tr><td><a name="ABMELDE">ABMELDE</a></td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATENBASIS</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="RERUNSTART">RERUNSTART</a></td><td>RERUNDATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TRAEGER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>STUETZPUNKT</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>SCHEINDATEI</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>ABLAGEANZAHL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="RESTART">RESTART</a></td><td>ZUSTAND</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="VEREINBARE">VEREINBARE</a></td><td>TAETIGKEIT</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SPEZTYP</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>OBLIGAT</td><td></td></tr>
+	<tr><td>&nbsp;</td><td>EINGANG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ART</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="ABSPANNE">ABSPANNE</a></td><td>TRAEGER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="MELDE">MELDE</a></td><td>TEXT</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="FEHLERHALT">FEHLERHALT</a></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    	</table>
+</center>
+
+<center>
+<p>&nbsp;</p>
+<hr width="50%" />
+<p>&nbsp;</p>
+    <h3>durch zusätzliche, vorhandene Programme ausgeführte Kommandos :</h3>
+    <table border="0" cellpadding="0" cellspacing="0">
+    	<tr>
+    		<th scope="col">Kommandoname</th>
+    		<th scope="col">Spezifikationen</th>
+    		<th scope="col">Programm</th>
+    		</tr>
+
+    	<tr><td><a name="DRUCKE">DRUCKE</a></td><td>&nbsp;</td><td>PS&DATTRANSP</td></tr>
+    	<tr><td>&nbsp;</td><td>GERAET</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ANZAHL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="EINTRAGE">EINTRAGE</a></td><td>&nbsp;</td><td>PS&DATTRANSP</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIEL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ART</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="INFORMIERE">INFORMIERE</a></td><td>&nbsp;</td><td>PS&KINFORM</td></tr>
+    	<tr><td>&nbsp;</td><td>KOMMANDO</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>BESCHREIBUNG&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>BESETZUNG</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>TRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>VERBRAUCH</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="KOMPRIMIERE">KOMPRIMIERE</a></td><td>&nbsp;</td><td>PS&TASAOP [ / PS&FORAOP / PS&ALGAOP ]</td></tr>
+	<tr><td>&nbsp;</td><td>QUELLE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BEREICH</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SPRACHE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZIEL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="LFINFORMIERE">LFINFORMIERE</a></td><td>&nbsp;</td><td>PS&KINFORM</td></tr>
+    	<tr><td>&nbsp;</td><td>BENUTZER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="MAUSGABE">MAUSGABE</a></td><td>&nbsp;</td><td>PS&MAKROBIB</td></tr>
+    	<tr><td>&nbsp;</td><td>GERAET</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>MAKRO</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="MEINTRAGE">MEINTRAGE</a></td><td>&nbsp;</td><td>PS&MAKROBIB</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIELDATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>NEUDEF</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLDATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>MAKRO</td><td>&nbsp;</td></tr>
+
+	<tr><td><a name="MLOESCHE">MLOESCHE</a></td><td>&nbsp;</td><td>PS&MAKROBIB</td></tr>
+	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MAKRO</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="MONTIERE">MONTIERE</a></td><td>&nbsp;</td><td>PS&MONTSEGM / PS&MONTIERER</td></tr>
+    	<tr><td>&nbsp;</td><td>MO</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MV</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TRANSFER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZUSATZ</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>OVERLAY</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="RECHNE">RECHNE</a></td><td>&nbsp;</td><td>PS&TASASSEMB / PS&FTNCOMP / PS&ALGOLCOMP</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLE</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>SPRACHE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DUMP</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATEN</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="SICHERE">SICHERE</a></td><td>&nbsp;</td><td>PS&DATTRANSP</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIEL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="STANZE">STANZE</a></td><td>&nbsp;</td><td>PS&DATTRANSP</td></tr>
+    	<tr><td>&nbsp;</td><td>GERAET</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ANZAHL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TEINTRAGE">TEINTRAGE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TKORRIGIERE">TKORRIGIERE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TNUMERIERE">TNUMERIERE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TVERTAUSCHE">TVERTAUSCHE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZEILE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TZLOESCHE">TZLOESCHE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZEILE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TKOPIERE">TKOPIERE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZEILE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZIEL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TMISCHE">TMISCHE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIELKAPITEL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLKAPITEL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>KORRKAPITEL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TKAPEINFUEGE">TKAPEINFUEGE</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIELKAPITEL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLKAPITEL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>EINFUEGUNGEN</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="TZKORRIGIERE">TZKORRIGIERE&nbsp;&nbsp;&nbsp;</a></td><td>&nbsp;</td><td>PS&TEXTHALT</td></tr>
+    	<tr><td>&nbsp;</td><td>NAME</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>KORRKAPITEL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="UEBERSETZE">UEBERSETZE</a></td><td>&nbsp;</td><td>PS&TASASSEMB / PS&FTNCOMP / PS&ALGOLCOMP</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SPRACHE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>NUMERIERUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MO</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>VARIANTE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DYNKON</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TRACE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MV</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>KE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TRANSFER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>VERSION</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BEREICH</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="UMBENENNE">UMBENENNE</a></td><td>&nbsp;</td><td>PS&AENDERE</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="VERLAGERE">VERLAGERE</a></td><td>&nbsp;</td><td>PS&DATTRANSP</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIEL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>TRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>FOLGETRAEGER</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="ZEICHNE">ZEICHNE</a></td><td>&nbsp;</td><td>PS&DATTRANSP</td></tr>
+    	<tr><td>&nbsp;</td><td>GERAET</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ANZAHL</td><td>&nbsp;</td></tr>
+
+    	</table>
+</center>
+
+
+<center>
+<p>&nbsp;</p>
+<hr width="50%" />
+<p>&nbsp;</p>
+    <h3>durch zusätzliche, noch nicht im Emulator vorhandene Programme ausgeführte Kommandos :</h3>
+    <table border="0" cellpadding="0" cellspacing="0">
+    	<tr>
+    		<th scope="col">Kommandoname</th>
+    		<th scope="col">Spezifikationen</th>
+    		<th scope="col">Programm</th>
+    		</tr>
+
+    	<tr><td><a name="DUMPE">DUMPE</a></td><td>&nbsp;</td><td>PS&DUMPE</td></tr>
+    	<tr><td>&nbsp;</td><td>MO</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATENBASIS</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ZUSATZ</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="PKORRIGIERE">PKORRIGIERE</a></td><td>&nbsp;</td><td>PS&KORROBJ</td></tr>
+    	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="SORTIERE">SORTIERE</a></td><td>&nbsp;</td><td>PS&SORTST</td></tr>
+    	<tr><td>&nbsp;</td><td>EINGABEDATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>AUSGABEDATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ARBEITSDATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>SORTIERFELD</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>RERUN</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TEILDATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SATZLAENGE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>VERARBEITUNG</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ESV</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="MISCHE">MISCHE</a></td><td>&nbsp;</td><td>PS&SORTST</td></tr>
+    	<tr><td>&nbsp;</td><td>EINGABEDATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>AUSGABEDATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>SORTIERFELD</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>TEILDATEI</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>SATZLAENGE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>ESV</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>RERUN</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="BINAERAUS">BINAERAUS</a></td><td>&nbsp;</td><td>PS&VBCAUS</td></tr>
+    	<tr><td>&nbsp;</td><td>GERAET</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>MO</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>FREMDSYSTEM</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="BINAEREIN">BINAEREIN</a></td><td>&nbsp;</td><td>PS&VBCEIN</td></tr>
+    	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="PSTANZE">PSTANZE</a></td><td>&nbsp;</td><td>PS&PRUEFAUS</td></tr>
+    	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>TRANSLATION</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>KLARSCHRIFT</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>VORSPANN</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ENDE</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ANZAHL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="MBKOPIERE">MBKOPIERE</a></td><td>&nbsp;</td><td>PS&MBKOPIERE</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLBAND</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIELBAND</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>EINFUEGUNGEN&nbsp;&nbsp;&nbsp;</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>LOESCHUNGEN</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>STEUER</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="BASIC">BASIC</a></td><td>&nbsp;</td><td>PS&DIALOGSYS</td></tr>
+    	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="BIBANMELDE">BIBANMELDE</a></td><td>&nbsp;</td><td>PS&BIBTRANS</td></tr>
+    	<tr><td>&nbsp;</td><td>BIBLIOTHEK</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>TRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>HIERARCHIE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="BIBVERLAGERE">BIBVERLAGERE</a></td><td>&nbsp;</td><td>PS&BIBTRANS</td></tr>
+    	<tr><td>&nbsp;</td><td>BIBLIOTHEK</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>TRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIEL</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>PROGRAMM</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>MO</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="WANDLE">WANDLE</a></td><td>&nbsp;</td><td>PS&WANDELOP</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLTRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIELTRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>RICHTUNG</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>KENNBLOCK</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>FORMAT</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BITDICHTE</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BLOCKZAEHLER</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>BLOCKUNG</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="DIALOGSYSTEM">DIALOGSYSTEM</a></td><td>&nbsp;</td><td>PS&DIALOGSYS</td></tr>
+    	<tr><td>&nbsp;</td><td>SPRACHE</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>INFORMATION</td><td>&nbsp;</td></tr>
+
+    	<tr><td><a name="KOPIERE">KOPIERE</a></td><td>&nbsp;</td><td>PS&KOP</td></tr>
+    	<tr><td>&nbsp;</td><td>DATEI</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>QUELLTRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>ZIELTRAEGER</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>EINFUEGUNGEN</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>AUSLASSUNGEN</td><td>&nbsp;</td></tr>
+    	<tr><td>&nbsp;</td><td>MODUS</td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td>PROTOKOLL</td><td>&nbsp;</td></tr>
+</table>
+</center>
+    <p>&nbsp;</p>
+    <!-- end .content --></div>
+  <!-- end .container --></div>
+</body>
+</html>
